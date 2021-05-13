@@ -17,6 +17,10 @@
 		23A59ABE264ACC2B0051707B /* AppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59ABD264ACC2B0051707B /* AppCoordinator.m */; };
 		23A59AC7264AEF710051707B /* MasterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AC6264AEF710051707B /* MasterViewModel.m */; };
 		23A59ACA264BB0520051707B /* MasterView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A59AC9264BB0520051707B /* MasterView.storyboard */; };
+		23A59AD9264BCB770051707B /* MeteoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AD7264BCB770051707B /* MeteoriteTableViewCell.m */; };
+		23A59ADA264BCB770051707B /* MeteoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23A59AD8264BCB770051707B /* MeteoriteTableViewCell.xib */; };
+		23A59AE0264BD4D00051707B /* MeteoriteListDataSourceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59ADF264BD4D00051707B /* MeteoriteListDataSourceDelegate.m */; };
+		23A59AE4264BF86A0051707B /* MeteoriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AE3264BF86A0051707B /* MeteoriteModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,13 @@
 		23A59AC5264AEF710051707B /* MasterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewModel.h; sourceTree = "<group>"; };
 		23A59AC6264AEF710051707B /* MasterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewModel.m; sourceTree = "<group>"; };
 		23A59AC9264BB0520051707B /* MasterView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MasterView.storyboard; sourceTree = "<group>"; };
+		23A59AD6264BCB770051707B /* MeteoriteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoriteTableViewCell.h; sourceTree = "<group>"; };
+		23A59AD7264BCB770051707B /* MeteoriteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteTableViewCell.m; sourceTree = "<group>"; };
+		23A59AD8264BCB770051707B /* MeteoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeteoriteTableViewCell.xib; sourceTree = "<group>"; };
+		23A59ADE264BD4D00051707B /* MeteoriteListDataSourceDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoriteListDataSourceDelegate.h; sourceTree = "<group>"; };
+		23A59ADF264BD4D00051707B /* MeteoriteListDataSourceDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteListDataSourceDelegate.m; sourceTree = "<group>"; };
+		23A59AE2264BF86A0051707B /* MeteoriteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeteoriteModel.h; path = MeteoriteTableViewCell/MeteoriteModel.h; sourceTree = "<group>"; };
+		23A59AE3264BF86A0051707B /* MeteoriteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MeteoriteModel.m; path = MeteoriteTableViewCell/MeteoriteModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +99,28 @@
 		23A59ACC264BB4230051707B /* Master */ = {
 			isa = PBXGroup;
 			children = (
+				23A59AE2264BF86A0051707B /* MeteoriteModel.h */,
+				23A59AE3264BF86A0051707B /* MeteoriteModel.m */,
 				23A59AC5264AEF710051707B /* MasterViewModel.h */,
 				23A59AC6264AEF710051707B /* MasterViewModel.m */,
 				232E611626494C910097D3D2 /* MasterViewController.h */,
 				232E611726494C910097D3D2 /* MasterViewController.m */,
+				23A59ADE264BD4D00051707B /* MeteoriteListDataSourceDelegate.h */,
+				23A59ADF264BD4D00051707B /* MeteoriteListDataSourceDelegate.m */,
+				23A59ADC264BCB7F0051707B /* MeteoriteTableViewCell */,
 				23A59AC9264BB0520051707B /* MasterView.storyboard */,
 			);
 			path = Master;
+			sourceTree = "<group>";
+		};
+		23A59ADC264BCB7F0051707B /* MeteoriteTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				23A59AD6264BCB770051707B /* MeteoriteTableViewCell.h */,
+				23A59AD7264BCB770051707B /* MeteoriteTableViewCell.m */,
+				23A59AD8264BCB770051707B /* MeteoriteTableViewCell.xib */,
+			);
+			path = MeteoriteTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23A59ADA264BCB770051707B /* MeteoriteTableViewCell.xib in Resources */,
 				232E612326494C920097D3D2 /* LaunchScreen.storyboard in Resources */,
 				232E612026494C920097D3D2 /* Assets.xcassets in Resources */,
 				23A59ACA264BB0520051707B /* MasterView.storyboard in Resources */,
@@ -166,10 +193,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23A59AE4264BF86A0051707B /* MeteoriteModel.m in Sources */,
+				23A59AE0264BD4D00051707B /* MeteoriteListDataSourceDelegate.m in Sources */,
 				232E612626494C920097D3D2 /* main.m in Sources */,
 				232E611826494C910097D3D2 /* MasterViewController.m in Sources */,
 				232E611226494C910097D3D2 /* AppDelegate.m in Sources */,
 				23A59ABE264ACC2B0051707B /* AppCoordinator.m in Sources */,
+				23A59AD9264BCB770051707B /* MeteoriteTableViewCell.m in Sources */,
 				23A59AC7264AEF710051707B /* MasterViewModel.m in Sources */,
 				232E611526494C910097D3D2 /* SceneDelegate.m in Sources */,
 				232E611E26494C910097D3D2 /* Talula_X.xcdatamodeld in Sources */,
