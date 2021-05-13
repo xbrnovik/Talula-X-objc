@@ -7,6 +7,8 @@
 
 #import "MeteoriteTableViewCell.h"
 
+NSString *const METEORITE_TABLEVIEW_CELL_IDENTIFIER = @"MeteoriteTableViewCell";
+
 @implementation MeteoriteTableViewCell
 
 - (void)awakeFromNib {

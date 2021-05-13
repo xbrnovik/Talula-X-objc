@@ -32,9 +32,4 @@
     return @"Nejaka krajina";
 }
 
-- (NSString *)reuseIdentifier
-{
-    return @"MeteoriteTableViewCell";
-}
-
 @end

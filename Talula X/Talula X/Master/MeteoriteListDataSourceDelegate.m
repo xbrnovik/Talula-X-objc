@@ -26,7 +26,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MeteoriteModel *model = _cellModels[indexPath.row];
-    MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:model.reuseIdentifier forIndexPath:indexPath];
+    MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:METEORITE_TABLEVIEW_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.nameLabel.text = model.name;
     cell.massLabel.text = [[self localeFormatter] stringFromNumber:[NSNumber numberWithInteger:model.mass]]; // :( not great, not terrible
     cell.placeLabel.text = model.place;

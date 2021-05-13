@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString *const METEORITE_TABLEVIEW_CELL_IDENTIFIER;
+
 @interface MeteoriteTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;

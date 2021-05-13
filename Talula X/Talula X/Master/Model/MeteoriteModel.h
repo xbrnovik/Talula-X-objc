@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, assign) NSInteger mass;
 @property (readonly, strong) NSString *place;
 
-@property (readonly, strong) NSString *reuseIdentifier;
-
 @end
 
 NS_ASSUME_NONNULL_END
