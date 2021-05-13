@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MeteoriteModel.h"
+#import "Meteorite.h"
 #import "MasterViewController.h"
 #import "MeteoritesDownloader.h"
 
@@ -14,7 +14,7 @@
 @interface MasterViewModel : NSObject
 
 @property (strong, nonatomic) MeteoritesDownloader * downloader;
-@property (readonly, nonatomic) NSArray<MeteoriteModel *> * meteorites;
+@property (readonly, nonatomic) NSArray<Meteorite *> * meteorites;
 
 - (void)updateMeteorites;
 

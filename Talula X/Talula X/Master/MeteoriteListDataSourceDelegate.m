@@ -14,7 +14,7 @@
 
 @implementation MeteoriteListDataSourceDelegate
 
-- (instancetype)initWithCellModels:(NSArray<MeteoriteModel*>*)cellModels
+- (instancetype)initWithCellModels:(NSArray<Meteorite*>*)cellModels
 {
     _cellModels = cellModels;
     self = [super init];
@@ -25,7 +25,7 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    MeteoriteModel *model = _cellModels[indexPath.row];
+    Meteorite *model = _cellModels[indexPath.row];
     MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:METEORITE_TABLEVIEW_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.nameLabel.text = model.name;
     cell.massLabel.text = [[self localeFormatter] stringFromNumber:[NSNumber numberWithInteger:model.mass]]; // :( not great, not terrible

@@ -6,13 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MeteoriteResponseModel.h"
+#import "MeteoriteResponse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeteoritesDownloader : NSObject
 
-- (void)meteorites:(void(^)(MeteoriteResponseModel *meteorite))success
+- (void)meteorites:(void(^)(MeteoriteResponse *meteorite))success
            failure:(void(^)(NSError *error))failure
             always:(void(^)(void))always;
 

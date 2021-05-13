@@ -24,7 +24,7 @@
     return components.URL;
 }
 
-- (void)meteorites:(void(^)(MeteoriteResponseModel *meteorite))success
+- (void)meteorites:(void(^)(MeteoriteResponse *meteorite))success
            failure:(void(^)(NSError * error))failure
             always:(void(^)(void))always
 {
@@ -32,7 +32,7 @@
     NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
       dataTaskWithURL:[self createURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data != nil) {
-            MeteoriteResponseModel *model = [MeteoriteResponseModel new];
+            MeteoriteResponse *model = [MeteoriteResponse new];
             success(model);
         } else {
             failure(error);

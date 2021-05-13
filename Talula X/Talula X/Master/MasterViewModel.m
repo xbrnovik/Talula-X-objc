@@ -17,12 +17,12 @@
 
 @synthesize meteorites = _meteorites;
 
-- (NSArray<MeteoriteModel *> *) meteorites
+- (NSArray<Meteorite *> *) meteorites
 {
-    return  @[[MeteoriteModel new], [MeteoriteModel new], [MeteoriteModel new]];
+    return  @[[Meteorite new], [Meteorite new], [Meteorite new]]; //TODO: downloaded
 }
 
-- (instancetype)initWithServiceHolder:(MasterViewController *)serviceHolder //TODO serviceHolder
+- (instancetype)initWithServiceHolder:(MasterViewController *)serviceHolder
                            controller:(MasterViewController *)controller
 {
     _downloader = [MeteoritesDownloader new];
@@ -37,7 +37,7 @@
 - (void)updateMeteorites
 {
     // TODO: UI start loading
-    [_downloader meteorites:^(MeteoriteResponseModel * _Nonnull meteorite) {
+    [_downloader meteorites:^(MeteoriteResponse * _Nonnull meteorite) {
         // TODO: store CD + get UI models
     } failure:^(NSError * _Nonnull error) {
         // TODO: UI show error

@@ -7,14 +7,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "MeteoriteModel.h"
+#import "Meteorite.h"
 #import "MeteoriteTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MeteoriteListDataSourceDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray<MeteoriteModel*>* cellModels;
+@property (strong, nonatomic) NSArray<Meteorite*>* cellModels;
 
 @end
 

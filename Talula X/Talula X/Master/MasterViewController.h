@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MeteoriteListDataSourceDelegate.h"
-#import "MeteoriteModel.h"
+#import "Meteorite.h"
 #import "MasterViewModel.h"
 
 @class MasterViewModel;

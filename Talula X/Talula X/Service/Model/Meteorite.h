@@ -1,5 +1,5 @@
 //
-//  MeteoriteModel.h
+//  Meteorite.h
 //  Talula X
 //
 //  Created by Diana Brnovik on 12/05/2021.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MeteoriteModel : NSObject
+@interface Meteorite : NSObject
 
 @property (readonly, strong) NSString *name;
 @property (readonly, assign) NSInteger mass;

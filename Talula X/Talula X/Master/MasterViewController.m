@@ -31,7 +31,7 @@
 -(void)reloadMeteorites
 {
     if (_meteoritesTableView != nil) {
-        NSArray<MeteoriteModel*>* models = [_viewModel meteorites]; //TODO: from view model
+        NSArray<Meteorite*>* models = [_viewModel meteorites]; //TODO: from view model
         
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) self = self;
