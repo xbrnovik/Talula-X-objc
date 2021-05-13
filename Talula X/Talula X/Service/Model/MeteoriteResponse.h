@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, nonatomic) NSArray<Meteorite *> * meteorites;
 
+- (instancetype)initFromData:(NSData *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -32,8 +32,8 @@
     NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
       dataTaskWithURL:[self createURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data != nil) {
-            MeteoriteResponse *model = [MeteoriteResponse new];
-            success(model);
+            MeteoriteResponse *meteoriteResponse = [[MeteoriteResponse alloc] initFromData:data];
+            success(meteoriteResponse);
         } else {
             failure(error);
         }

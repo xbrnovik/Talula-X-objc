@@ -9,4 +9,14 @@
 
 @implementation MeteoriteResponse
 
+- (instancetype)initFromData:(NSData *)data
+{
+    //
+    self = [super init];
+    if (self) {
+        //
+    }
+    return self;
+}
+
 @end

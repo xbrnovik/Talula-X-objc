@@ -23,6 +23,7 @@
 		23A59AE4264BF86A0051707B /* Meteorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AE3264BF86A0051707B /* Meteorite.m */; };
 		23A59AF0264D1FF50051707B /* MeteoritesDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AEF264D1FF50051707B /* MeteoritesDownloader.m */; };
 		23A59AF5264D3DD20051707B /* MeteoriteResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AF4264D3DD20051707B /* MeteoriteResponseModel.m */; };
+		23A59AFF264D56D60051707B /* MeteoriteCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AFE264D56D60051707B /* MeteoriteCellModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		23A59AEF264D1FF50051707B /* MeteoritesDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoritesDownloader.m; sourceTree = "<group>"; };
 		23A59AF3264D3DD20051707B /* MeteoriteResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoriteResponse.h; sourceTree = "<group>"; };
 		23A59AF4264D3DD20051707B /* MeteoriteResponseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteResponseModel.m; sourceTree = "<group>"; };
+		23A59AFD264D56D60051707B /* MeteoriteCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeteoriteCellModel.h; path = "Talula X/Service/Model/MeteoriteCellModel.h"; sourceTree = SOURCE_ROOT; };
+		23A59AFE264D56D60051707B /* MeteoriteCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MeteoriteCellModel.m; path = "Talula X/Service/Model/MeteoriteCellModel.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 		23A59ADC264BCB7F0051707B /* MeteoriteTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				23A59AFD264D56D60051707B /* MeteoriteCellModel.h */,
+				23A59AFE264D56D60051707B /* MeteoriteCellModel.m */,
 				23A59AD6264BCB770051707B /* MeteoriteTableViewCell.h */,
 				23A59AD7264BCB770051707B /* MeteoriteTableViewCell.m */,
 				23A59AD8264BCB770051707B /* MeteoriteTableViewCell.xib */,
@@ -226,6 +231,7 @@
 				232E611826494C910097D3D2 /* MasterViewController.m in Sources */,
 				232E611226494C910097D3D2 /* AppDelegate.m in Sources */,
 				23A59AF0264D1FF50051707B /* MeteoritesDownloader.m in Sources */,
+				23A59AFF264D56D60051707B /* MeteoriteCellModel.m in Sources */,
 				23A59ABE264ACC2B0051707B /* AppCoordinator.m in Sources */,
 				23A59AD9264BCB770051707B /* MeteoriteTableViewCell.m in Sources */,
 				23A59AC7264AEF710051707B /* MasterViewModel.m in Sources */,

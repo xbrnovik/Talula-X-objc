@@ -18,7 +18,7 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MasterView" bundle:nil];
     MasterViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
-    MasterViewModel *viewModel = [MasterViewModel new];
+    MasterViewModel *viewModel = [[MasterViewModel alloc] initWithMeteoritesDownloader:[MeteoritesDownloader new] controller:controller];
     controller.viewModel = viewModel;
     [navigationController pushViewController:controller animated:YES];
 }

@@ -6,6 +6,7 @@
 //
 
 #import "MasterViewModel.h"
+#import "MasterViewController.h"
 
 @interface MasterViewModel ()
 
@@ -22,10 +23,10 @@
     return  @[[Meteorite new], [Meteorite new], [Meteorite new]]; //TODO: downloaded
 }
 
-- (instancetype)initWithServiceHolder:(MasterViewController *)serviceHolder
-                           controller:(MasterViewController *)controller
+- (instancetype)initWithMeteoritesDownloader:(MeteoritesDownloader *)downloader
+                                  controller:(MasterViewController *)controller
 {
-    _downloader = [MeteoritesDownloader new];
+    _downloader = downloader;
     _controller = controller;
     self = [super init];
     if (self) {

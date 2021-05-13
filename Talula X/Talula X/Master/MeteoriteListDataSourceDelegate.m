@@ -28,7 +28,7 @@
     Meteorite *model = _cellModels[indexPath.row];
     MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:METEORITE_TABLEVIEW_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.nameLabel.text = model.name;
-    cell.massLabel.text = [[self localeFormatter] stringFromNumber:[NSNumber numberWithInteger:model.mass]]; // :( not great, not terrible
+    cell.massLabel.text = [[self localeFormatter] stringFromNumber:model.mass]; // :( not great, not terrible
     cell.placeLabel.text = model.place;
     cell.iconImageView.image = [UIImage new];
     return cell;

@@ -1,17 +1,13 @@
 //
-//  Meteorite.m
+//  MeteoriteCellModel.m
 //  Talula X
 //
-//  Created by Diana Brnovik on 12/05/2021.
+//  Created by Diana Brnovik on 13/05/2021.
 //
 
-#import "Meteorite.h"
+#import "MeteoriteCellModel.h"
 
-@interface Meteorite ()
-
-@end
-
-@implementation Meteorite
+@implementation MeteoriteCellModel
 
 @synthesize name = _name;
 @synthesize mass = _mass;
