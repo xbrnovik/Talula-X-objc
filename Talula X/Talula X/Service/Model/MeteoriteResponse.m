@@ -17,6 +17,7 @@
     for (NSDictionary* meteoriteValues in meteoritesDictionary) {
         
         NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        [numberFormatter setDecimalSeparator:@"."];
         NSString* massText = [meteoriteValues objectForKey:@"mass"];
         NSString* longitudeText = [meteoriteValues objectForKey:@"reclat"];
         NSString* latitudeText = [meteoriteValues objectForKey:@"reclong"];

@@ -17,10 +17,10 @@
 
 @implementation MasterViewModel
 
-- (instancetype)initWithMeteoritesDownloader:(MeteoritesDownloader *)downloader
-                                  controller:(MasterViewController *)controller
+- (instancetype)initWithMeteoriteService:(MeteoriteService *)service
+                              controller:(MasterViewController *)controller
 {
-    _downloader = downloader;
+    _service = service;
     _controller = controller;
     self = [super init];
     if (self) {
@@ -32,11 +32,11 @@
 - (void)updateMeteorites
 {
     // TODO: UI start loading
-    
-    [_downloader meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
+    [_service meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         // TODO: store CD + get UI models
         weakSelf.meteorites = meteoriteResponse.meteorites;
+        // update place
         [weakSelf.controller reloadMeteorites];
     } failure:^(NSError * _Nonnull error) {
         // TODO: UI show error
@@ -45,6 +45,5 @@
     }];
     // controller reload
 }
-
 
 @end
