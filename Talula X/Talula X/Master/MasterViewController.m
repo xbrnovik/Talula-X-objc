@@ -6,8 +6,6 @@
 //
 
 #import "MasterViewController.h"
-#import "MeteoriteListDataSourceDelegate.h"
-#import "MeteoriteModel.h"
 
 @interface MasterViewController ()
 
@@ -26,20 +24,20 @@
     [self.meteoritesTableView registerNib:[UINib nibWithNibName:@"MeteoriteTableViewCell" bundle:nil] forCellReuseIdentifier:@"MeteoriteTableViewCell"];
     self.meteoritesTableView.dataSource = _meteoriteListDataSourceDelegate;
     self.meteoritesTableView.delegate = _meteoriteListDataSourceDelegate;
+    [_viewModel updateMeteorites];
     [self reloadMeteorites];
 }
 
 -(void)reloadMeteorites
 {
     if (_meteoritesTableView != nil) {
-        NSArray<MeteoriteModel*>* models = @[[MeteoriteModel new], [MeteoriteModel new], [MeteoriteModel new]]; //TODO: from view model
+        NSArray<MeteoriteModel*>* models = [_viewModel meteorites]; //TODO: from view model
+        
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) self = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             [[self meteoritesTableView] reloadData];
         });
-        
-        
     }
 }
 

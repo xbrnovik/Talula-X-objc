@@ -37,6 +37,7 @@
         } else {
             failure(error);
         }
+        always();
     }];
     [downloadTask resume];
 }

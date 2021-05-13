@@ -17,7 +17,9 @@
 - (void)showHomeFromNavigationController:(UINavigationController *)navigationController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MasterView" bundle:nil];
-    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
+    MasterViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
+    MasterViewModel *viewModel = [MasterViewModel new];
+    controller.viewModel = viewModel;
     [navigationController pushViewController:controller animated:YES];
 }
 

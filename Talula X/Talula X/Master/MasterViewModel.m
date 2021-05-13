@@ -9,28 +9,42 @@
 
 @interface MasterViewModel ()
 
-//TODO @property serviceHolder
 @property (weak, nonatomic) MasterViewController * controller;
 
 @end
 
 @implementation MasterViewModel
 
-- (NSArray<NSString *> *) places
+@synthesize meteorites = _meteorites;
+
+- (NSArray<MeteoriteModel *> *) meteorites
 {
-    return  @[@"Bratislava", @"Brno", @"Košice"];
+    return  @[[MeteoriteModel new], [MeteoriteModel new], [MeteoriteModel new]];
 }
 
 - (instancetype)initWithServiceHolder:(MasterViewController *)serviceHolder //TODO serviceHolder
                            controller:(MasterViewController *)controller
 {
-    //TODO set serviceHolder property
+    _downloader = [MeteoritesDownloader new];
     _controller = controller;
     self = [super init];
     if (self) {
         //NOTE: set delegates
     }
     return self;
+}
+
+- (void)updateMeteorites
+{
+    // TODO: UI start loading
+    [_downloader meteorites:^(MeteoriteResponseModel * _Nonnull meteorite) {
+        // TODO: store CD + get UI models
+    } failure:^(NSError * _Nonnull error) {
+        // TODO: UI show error
+    } always:^{
+        // TODO: UI stop loading
+    }];
+    // controller reload
 }
 
 

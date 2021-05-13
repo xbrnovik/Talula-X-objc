@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MasterViewController.h"
+#import "MasterViewModel.h"
 
 @interface AppCoordinator : NSObject
 
