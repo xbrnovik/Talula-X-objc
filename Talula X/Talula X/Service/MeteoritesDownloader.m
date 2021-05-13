@@ -24,7 +24,7 @@
     return components.URL;
 }
 
-- (void)meteorites:(void(^)(MeteoriteResponse *meteorite))success
+- (void)meteorites:(void(^)(MeteoriteResponse *meteoriteResponse))success
            failure:(void(^)(NSError * error))failure
             always:(void(^)(void))always
 {

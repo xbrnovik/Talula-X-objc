@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Meteorite : NSObject
 
 @property (strong, nonatomic) NSString *identifier;
-@property (strong, nonatomic) NSString *latitude;
-@property (strong, nonatomic) NSString *longitude;
+@property (strong, nonatomic) NSNumber *latitude;
+@property (strong, nonatomic) NSNumber *longitude;
 @property (strong, nonatomic) NSString *category;
-@property (strong, nonatomic) NSString *year;
+@property (strong, nonatomic) NSDate *year;
 @property (strong, nonatomic) NSNumber *mass;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *place;

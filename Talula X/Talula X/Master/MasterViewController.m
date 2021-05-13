@@ -25,18 +25,16 @@
     self.meteoritesTableView.dataSource = _meteoriteListDataSourceDelegate;
     self.meteoritesTableView.delegate = _meteoriteListDataSourceDelegate;
     [_viewModel updateMeteorites];
-    [self reloadMeteorites];
 }
 
 -(void)reloadMeteorites
 {
     if (_meteoritesTableView != nil) {
-        NSArray<Meteorite*>* models = [_viewModel meteorites]; //TODO: from view model
-        
+        NSArray<Meteorite*>* models = [_viewModel meteorites];
         _meteoriteListDataSourceDelegate.cellModels = models;
-        __weak typeof(self) self = self;
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[self meteoritesTableView] reloadData];
+            [[weakSelf meteoritesTableView] reloadData];
         });
     }
 }

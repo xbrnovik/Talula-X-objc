@@ -16,5 +16,7 @@
 
 @property (strong, nonatomic) MasterViewModel * viewModel;
 
+-(void)reloadMeteorites;
+
 @end
 

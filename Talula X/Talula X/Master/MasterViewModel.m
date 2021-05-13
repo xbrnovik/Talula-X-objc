@@ -11,17 +11,11 @@
 @interface MasterViewModel ()
 
 @property (weak, nonatomic) MasterViewController * controller;
+@property (readwrite, assign) NSMutableArray<Meteorite *> * meteorites;
 
 @end
 
 @implementation MasterViewModel
-
-@synthesize meteorites = _meteorites;
-
-- (NSArray<Meteorite *> *) meteorites
-{
-    return  @[[Meteorite new], [Meteorite new], [Meteorite new]]; //TODO: downloaded
-}
 
 - (instancetype)initWithMeteoritesDownloader:(MeteoritesDownloader *)downloader
                                   controller:(MasterViewController *)controller
@@ -38,8 +32,12 @@
 - (void)updateMeteorites
 {
     // TODO: UI start loading
-    [_downloader meteorites:^(MeteoriteResponse * _Nonnull meteorite) {
+    
+    [_downloader meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
         // TODO: store CD + get UI models
+        weakSelf.meteorites = meteoriteResponse.meteorites;
+        [weakSelf.controller reloadMeteorites];
     } failure:^(NSError * _Nonnull error) {
         // TODO: UI show error
     } always:^{

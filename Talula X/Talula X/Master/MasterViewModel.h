@@ -15,7 +15,7 @@
 @interface MasterViewModel : NSObject
 
 @property (strong, nonatomic) MeteoritesDownloader * downloader;
-@property (readonly, nonatomic) NSArray<Meteorite *> * meteorites;
+@property (readonly, nonatomic) NSMutableArray<Meteorite *> * meteorites; //NOTE: private(set) => readonly + writeonly
 
 - (instancetype)initWithMeteoritesDownloader:(MeteoritesDownloader *)downloader
                                   controller:(MasterViewController *)controller;

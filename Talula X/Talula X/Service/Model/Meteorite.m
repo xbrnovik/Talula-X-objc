@@ -13,23 +13,4 @@
 
 @implementation Meteorite
 
-@synthesize name = _name;
-@synthesize mass = _mass;
-@synthesize place = _place;
-
-- (NSString *)name
-{
-    return @"Nejaky meteorit";
-}
-
-- (NSNumber *)mass
-{
-    return @1000;
-}
-
-- (NSString *)place
-{
-    return @"Nejaka krajina";
-}
-
 @end

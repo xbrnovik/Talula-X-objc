@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MeteoriteResponse : NSObject
 
-@property (readonly, nonatomic) NSArray<Meteorite *> * meteorites;
+@property (readonly, nonatomic) NSMutableArray<Meteorite *> * meteorites;
 
 - (instancetype)initFromData:(NSData *)data;
 
