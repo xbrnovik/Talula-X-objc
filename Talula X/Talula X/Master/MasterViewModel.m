@@ -30,7 +30,7 @@
 
 - (void)updateMeteorites
 {
-    // TODO: UI start loading
+    [_controller startLoading];
     [_service meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
@@ -41,12 +41,13 @@
             [newMeteorites addObject:model];
         }
         weakSelf.meteorites = newMeteorites;
+        [weakSelf.controller endLoadingWithSuccess:YES];
         [weakSelf.controller reloadMeteorites];
     } failure:^(NSError * _Nonnull error) {
-        // TODO: UI show error
-        [self loadMeteorites];
+        [_controller endLoadingWithSuccess:NO];
+        //[self loadMeteorites];
     } always:^{
-        // TODO: UI stop loading
+        //NOTE: Happens always.
     }];
 }
 
