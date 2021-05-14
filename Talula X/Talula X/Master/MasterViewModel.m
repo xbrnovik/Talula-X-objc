@@ -28,34 +28,10 @@
     return self;
 }
 
-- (void)updateMeteorites
-{
-    [_controller startLoading];
-    [_service meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
-        __weak typeof(self) weakSelf = self; // :( not great not terrible
-        NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
-        [weakSelf.storage storeMeteorites:meteoriteResponse.meteorites];
-        for (NSArray<CDMeteorite*>* downloadedMeteorite in meteoriteResponse.meteorites) {
-            MeteoriteCellModel *model = [MeteoriteCellModel new];
-            [model setupFromMeteorite:downloadedMeteorite];
-            [newMeteorites addObject:model];
-        }
-        weakSelf.meteorites = newMeteorites;
-        [weakSelf.controller endLoadingWithSuccess:YES];
-        [weakSelf.controller reloadMeteorites];
-    } failure:^(NSError * _Nonnull error) {
-        [_controller endLoadingWithSuccess:NO];
-        //[self loadMeteorites];
-    } always:^{
-        //NOTE: Happens always.
-    }];
-}
-
-
 - (void)loadMeteorites
 {
     NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
-    NSArray<CDMeteorite*>* storedMeteorites = [_storage loadMeteorites];
+    NSArray<CDMeteorite*>* storedMeteorites = [_storage storedMeteorites];
     for (NSArray<CDMeteorite*>* storedMeteorite in storedMeteorites) {
         MeteoriteCellModel *model = [MeteoriteCellModel new];
         [model setupFromCDMeteorite:storedMeteorite];
@@ -63,6 +39,35 @@
     }
     _meteorites = newMeteorites;
     [_controller reloadMeteorites];
+}
+
+- (void)updateMeteorites
+{
+    [_service meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
+        NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
+        _meteorites = newMeteorites;
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        [weakSelf.storage storeMeteorites:meteoriteResponse.meteorites];
+        for (Meteorite* downloadedMeteorite in meteoriteResponse.meteorites) {
+            MeteoriteCellModel *model = [MeteoriteCellModel new];
+            [model setupFromMeteorite:downloadedMeteorite];
+            [newMeteorites addObject:model];
+        }
+        [weakSelf.controller endLoadingWithSuccess:YES];
+        [weakSelf.controller reloadMeteorites];
+    } failure:^(NSError * _Nonnull error) {
+        NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
+        _meteorites = newMeteorites;
+        NSArray<CDMeteorite*>* storedMeteorites = [_storage storedMeteorites];
+        for (CDMeteorite* storedMeteorite in storedMeteorites) {
+            MeteoriteCellModel *model = [MeteoriteCellModel new];
+            [model setupFromCDMeteorite:storedMeteorite];
+            [newMeteorites addObject:model];
+        }
+        [_controller endLoadingWithSuccess:NO];
+    } always:^{
+        //NOTE: Happens always.
+    }];
 }
 
 @end

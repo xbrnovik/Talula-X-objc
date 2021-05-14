@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init;
 - (void)storeMeteorites:(NSArray<Meteorite*>*)meteorites;
-- (NSArray<CDMeteorite*>*)loadMeteorites;
+- (NSArray<CDMeteorite*>*)storedMeteorites;
 
 @end
 

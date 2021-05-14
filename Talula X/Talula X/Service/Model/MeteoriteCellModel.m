@@ -45,7 +45,7 @@
 {
     _name = meteorite.name;
     _mass = meteorite.mass; // :( not great, not terrible
-    _place = meteorite.place;
+    _place = meteorite.place ? meteorite.place : @"-";
 }
 
 - (NSNumberFormatter *)localeFormatter

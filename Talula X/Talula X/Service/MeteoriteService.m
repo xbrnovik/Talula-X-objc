@@ -71,11 +71,11 @@
                 } always:^{
                     dispatch_group_leave(group);
                 }];
-                
-                dispatch_group_notify(group, mainQueue, ^{
-                    success(meteoriteResponse);
-                });
             }
+            
+            dispatch_group_notify(group, mainQueue, ^{
+                success(meteoriteResponse);
+            });
             
         } else {
             failure(error);

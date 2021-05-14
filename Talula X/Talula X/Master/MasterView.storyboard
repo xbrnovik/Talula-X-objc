@@ -59,51 +59,19 @@
                                     <constraint firstAttribute="bottom" secondItem="blJ-fb-MRx" secondAttribute="bottom" id="Qtt-Us-jKY"/>
                                 </constraints>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jeQ-70-WyT">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KJi-X8-lgU">
-                                        <rect key="frame" x="0.0" y="384" width="414" height="50.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYD-to-wSa">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eRi-e7-2qX">
-                                                <rect key="frame" x="0.0" y="30.5" width="414" height="20"/>
-                                            </activityIndicatorView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="KJi-X8-lgU" firstAttribute="width" secondItem="jeQ-70-WyT" secondAttribute="width" id="Nza-Um-5pz"/>
-                                    <constraint firstItem="KJi-X8-lgU" firstAttribute="centerY" secondItem="jeQ-70-WyT" secondAttribute="centerY" id="gNp-LI-8GY"/>
-                                    <constraint firstItem="KJi-X8-lgU" firstAttribute="centerX" secondItem="jeQ-70-WyT" secondAttribute="centerX" id="qss-1a-fan"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mmK-tO-dVF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jeQ-70-WyT" firstAttribute="leading" secondItem="mmK-tO-dVF" secondAttribute="leading" id="8cM-ab-EnV"/>
                             <constraint firstItem="Qkd-NX-gZ2" firstAttribute="leading" secondItem="mmK-tO-dVF" secondAttribute="leading" id="9EP-DC-Elk"/>
-                            <constraint firstItem="jeQ-70-WyT" firstAttribute="trailing" secondItem="mmK-tO-dVF" secondAttribute="trailing" id="C2k-Fn-CNF"/>
                             <constraint firstAttribute="bottom" secondItem="Qkd-NX-gZ2" secondAttribute="bottom" id="E19-GZ-SlR"/>
-                            <constraint firstItem="jeQ-70-WyT" firstAttribute="bottom" secondItem="mmK-tO-dVF" secondAttribute="bottom" id="I0n-1o-Xky"/>
                             <constraint firstItem="Qkd-NX-gZ2" firstAttribute="top" secondItem="mmK-tO-dVF" secondAttribute="top" id="Z86-IR-u2b"/>
-                            <constraint firstItem="jeQ-70-WyT" firstAttribute="top" secondItem="mmK-tO-dVF" secondAttribute="top" id="y2y-T4-8IF"/>
                             <constraint firstAttribute="trailing" secondItem="Qkd-NX-gZ2" secondAttribute="trailing" id="zIP-Km-ioM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="eRi-e7-2qX" id="pwm-w0-Rcc"/>
                         <outlet property="errorLabel" destination="DLk-CE-Ugj" id="cBj-YN-KaU"/>
                         <outlet property="errorView" destination="blJ-fb-MRx" id="P5B-kw-i5e"/>
-                        <outlet property="loadingLabel" destination="bYD-to-wSa" id="o80-Ye-PW2"/>
-                        <outlet property="loadingView" destination="jeQ-70-WyT" id="4ZJ-hH-uXI"/>
                         <outlet property="meteoritesTableView" destination="vVh-zL-hgq" id="3Ua-v6-XfN"/>
                     </connections>
                 </viewController>

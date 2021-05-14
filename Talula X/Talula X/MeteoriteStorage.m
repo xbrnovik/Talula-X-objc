@@ -76,10 +76,10 @@
        NSLog(@"Performed fetch.");
     };
     //delete
-    NSArray<CDMeteorite*>* loadedMeteorites = fetchedResultsController.fetchedObjects;
-    for (CDMeteorite* loadedMeteorite in loadedMeteorites) {
-        [managedObjectContext deleteObject:loadedMeteorite];
-    }
+    NSFetchRequest *deleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDMeteorite"];
+    NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:deleteFetchRequest];
+    NSError *deleteError = nil;
+    [[[[CoreDataContainer new] persistentContainer ] persistentStoreCoordinator] executeRequest:batchDeleteRequest withContext:managedObjectContext error:&deleteError];
     //add
     for (CDMeteorite* meteorite in meteorites) {
         CDMeteorite *newMeteorite = [NSEntityDescription insertNewObjectForEntityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
@@ -112,7 +112,7 @@
     };
 }
 
-- (NSArray<CDMeteorite*>*)loadMeteorites:(NSArray<Meteorite*>*)meteorites
+- (NSArray<CDMeteorite*>*)storedMeteorites
 {
     // fetch
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
