@@ -27,9 +27,9 @@
 {
     [super viewDidLoad];
     self.title = @"Meteorites";
-    self.errorLabel.text = @"Prepáč, nastala chyba.";
+    self.errorLabel.text = @"Prepáč, nastala chyba. Zobrazované dáta sú offline.";
     self.loadingLabel.text = @"Načítava sa.";
-    self.retryButton.text = @"Vyskúšaj znova.";
+    [self.retryButton setTitle:@"Vyskúšaj znova." forState:UIControlStateNormal];
     _meteoriteListDataSourceDelegate = [MeteoriteListDataSourceDelegate new];
     [self.meteoritesTableView registerNib:[UINib nibWithNibName:@"MeteoriteTableViewCell" bundle:nil] forCellReuseIdentifier:@"MeteoriteTableViewCell"];
     _refreshControl = [[UIRefreshControl alloc]init];
