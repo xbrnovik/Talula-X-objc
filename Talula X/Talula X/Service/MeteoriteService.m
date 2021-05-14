@@ -45,7 +45,11 @@
            failure:(void(^)(NSError * error))failure
             always:(void(^)(void))always
 {
-    NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    [NSURLCache.sharedURLCache removeCachedResponsesSinceDate:[NSDate new]]; // pull to refresh
+    NSURLSessionDataTask *downloadTask = [session
       dataTaskWithURL:[self createURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data != nil) {
             MeteoriteResponse *meteoriteResponse = [[MeteoriteResponse alloc] initFromData:data];
@@ -72,7 +76,6 @@
                     dispatch_group_leave(group);
                 }];
             }
-            
             dispatch_group_notify(group, mainQueue, ^{
                 success(meteoriteResponse);
             });

@@ -44,7 +44,7 @@
 - (void)setupFromMeteorite:(Meteorite *)meteorite
 {
     _name = meteorite.name;
-    _mass = meteorite.mass; // :( not great, not terrible
+    _mass = meteorite.mass;
     _place = meteorite.place ? meteorite.place : @"-";
 }
 

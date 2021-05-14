@@ -25,7 +25,7 @@
 - (void)createFetchedResultsController {
     if (!_fetchedResultsController) {
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer new] persistentContainer ] viewContext];
+        NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"mass" ascending:NO];
         [request setSortDescriptors:@[sort]];
@@ -54,7 +54,7 @@
 {
     // fetch
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer new] persistentContainer ] viewContext];
+    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"mass" ascending:NO];
     [request setSortDescriptors:@[sort]];
@@ -93,7 +93,7 @@
         newMeteorite.name = meteorite.name;
     }
     //save
-    [[CoreDataContainer new] saveContext];
+    [[CoreDataContainer shared] saveContext];
     //get
     NSFetchedResultsController *fetchedResultsController2 = [[NSFetchedResultsController alloc]
                                                             initWithFetchRequest:request
@@ -116,12 +116,13 @@
 {
     // fetch
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer new] persistentContainer ] viewContext];
+    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"mass" ascending:NO];
     [request setSortDescriptors:@[sort]];
     [request setEntity:entity];
     [request setFetchBatchSize:20];
+    
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
                                                             initWithFetchRequest:request
                                                             managedObjectContext:managedObjectContext

@@ -35,7 +35,7 @@
     [_viewModel updateMeteorites];
 }
 
--(void)reloadMeteorites
+- (void)reloadMeteoritesWithSuccess:(BOOL)success
 {
     if (_meteoritesTableView != nil) {
         NSArray<MeteoriteCellModel*>* models = [_viewModel meteorites];
@@ -44,15 +44,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.meteoritesTableView reloadData];
             [weakSelf.refreshControl endRefreshing];
+            weakSelf.errorView.hidden = success;
         });
     }
-}
-
-- (void)endLoadingWithSuccess:(BOOL)success {
-    __weak typeof(self) weakSelf = self; // :( not great not terrible
-    dispatch_async(dispatch_get_main_queue(), ^{
-        weakSelf.errorView.hidden = success;
-    });
 }
 
 - (void)refreshDataTapped
