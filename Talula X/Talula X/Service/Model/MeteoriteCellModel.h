@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "CDMeteorite+CoreDataProperties.h"
 #import "CDMeteorite+CoreDataClass.h"
 #import "Meteorite.h"
@@ -14,14 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MeteoriteCellModel : NSObject
 
-@property (strong, nonatomic) NSString *identifier;
-@property (strong, nonatomic) NSNumber *latitude;
-@property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSString *category;
-@property (strong, nonatomic) NSDate *year;
-@property (strong, nonatomic) NSNumber *mass;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *massRounded;
 @property (strong, nonatomic) NSString *place;
+@property (strong, nonatomic) UIImage *icon;
 
 - (void)setupFromCDMeteorite:(CDMeteorite *)meteorite;
 - (void)setupFromMeteorite:(Meteorite *)meteorite;

@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
-@property (weak, nonatomic) IBOutlet UIButton *retryButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *meteoritesTableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -28,13 +27,13 @@
     [super viewDidLoad];
     self.title = @"Meteorites";
     self.errorLabel.text = @"Prepáč, nastala chyba. Zobrazované dáta sú offline.";
-    self.loadingLabel.text = @"Načítava sa.";
-    [self.retryButton setTitle:@"Vyskúšaj znova." forState:UIControlStateNormal];
+    self.loadingLabel.text = @"Načítava sa...";
+    self.loadingView.hidden = YES;
+    self.errorView.hidden = YES;
     _meteoriteListDataSourceDelegate = [MeteoriteListDataSourceDelegate new];
     [self.meteoritesTableView registerNib:[UINib nibWithNibName:@"MeteoriteTableViewCell" bundle:nil] forCellReuseIdentifier:@"MeteoriteTableViewCell"];
     _refreshControl = [[UIRefreshControl alloc]init];
-    [_refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-    [_refreshControl addTarget:self action:@selector(errorView) forControlEvents:UIControlEventValueChanged];
+    [_refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.meteoritesTableView.refreshControl = _refreshControl;
     self.meteoritesTableView.dataSource = _meteoriteListDataSourceDelegate;
     self.meteoritesTableView.delegate = _meteoriteListDataSourceDelegate;
@@ -55,20 +54,21 @@
 }
 
 - (void)startLoading {
-    self.loadingView.hidden = NO;
+    //self.loadingView.hidden = NO;
     [_activityIndicator startAnimating];
 }
 
 - (void)endLoadingWithSuccess:(BOOL)success {
     __weak typeof(self) weakSelf = self; // :( not great not terrible
     dispatch_async(dispatch_get_main_queue(), ^{
-        weakSelf.loadingView.hidden = YES;
+        //weakSelf.loadingView.hidden = YES;
         weakSelf.errorView.hidden = success;
         [weakSelf.activityIndicator stopAnimating];
     });
 }
 
-- (IBAction)reloadMeteoritesTapped:(id)sender {
+- (void)refreshData
+{
     [_viewModel updateMeteorites];
 }
 

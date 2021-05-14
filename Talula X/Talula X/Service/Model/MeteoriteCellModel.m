@@ -7,20 +7,44 @@
 
 #import "MeteoriteCellModel.h"
 
+@interface MeteoriteCellModel ()
+
+    @property (strong, nonatomic) NSNumber *mass;
+
+@end
+
 @implementation MeteoriteCellModel
 
-@synthesize mass = _mass;
+@synthesize massRounded = _massRounded;
+@synthesize icon = _icon;
 
-- (NSNumber *)mass
+- (NSString *)massRounded
 {
-    return @1000;
+    return [[self localeFormatter] stringFromNumber:_mass]; // :( not great, not terrible;
+}
+
+- (UIImage *)icon
+{
+    if ([_mass doubleValue] >= 10000) {
+        return [UIImage imageNamed:@"BigMeteorite"];
+    } else if ([_mass doubleValue] >= 1000) {
+        return [UIImage imageNamed:@"SmallMeteorite"];
+    } else {
+        return [UIImage imageNamed:@"OtherMeteorite"];
+    }
 }
 
 - (void)setupFromCDMeteorite:(CDMeteorite *)meteorite
 {
     _name = meteorite.name;
-    NSNumber *massNumber = [NSNumber numberWithDouble:meteorite.mass];
-    _mass = [[self localeFormatter] stringFromNumber:massNumber]; // :( not great, not terrible
+    _mass = [NSNumber numberWithDouble:meteorite.mass];
+    _place = meteorite.place;
+}
+
+- (void)setupFromMeteorite:(Meteorite *)meteorite
+{
+    _name = meteorite.name;
+    _mass = meteorite.mass; // :( not great, not terrible
     _place = meteorite.place;
 }
 
@@ -32,11 +56,12 @@
     return formatter;
 }
 
-- (void)setupFromMeteorite:(Meteorite *)meteorite
+- (NSNumberFormatter *)localeDecimal
 {
-    _name = meteorite.name;
-    _mass = [[self localeFormatter] stringFromNumber:meteorite.mass]; // :( not great, not terrible
-    _place = meteorite.place;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.minimumFractionDigits = 0;
+    formatter.maximumFractionDigits = 0;
+    return formatter;
 }
 
 @end

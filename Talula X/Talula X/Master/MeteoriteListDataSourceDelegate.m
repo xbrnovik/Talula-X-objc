@@ -18,9 +18,6 @@
 {
     _cellModels = cellModels;
     self = [super init];
-    if (self) {
-        //
-    }
     return self;
 }
 
@@ -28,9 +25,9 @@
     MeteoriteCellModel *model = _cellModels[indexPath.row];
     MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:METEORITE_TABLEVIEW_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.nameLabel.text = model.name;
-    cell.massLabel.text = [[self localeFormatter] stringFromNumber:model.mass]; // :( not great, not terrible
+    cell.massLabel.text = model.massRounded;
     cell.placeLabel.text = model.place;
-    cell.iconImageView.image = [UIImage new];
+    cell.iconImageView.image = model.icon;
     return cell;
 }
 

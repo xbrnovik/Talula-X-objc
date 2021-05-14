@@ -13,13 +13,11 @@ NSString *const METEORITE_TABLEVIEW_CELL_IDENTIFIER = @"MeteoriteTableViewCell";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    //_iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end
