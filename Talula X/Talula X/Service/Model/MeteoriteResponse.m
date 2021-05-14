@@ -19,8 +19,8 @@
         NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
         [numberFormatter setDecimalSeparator:@"."];
         NSString* massText = [meteoriteValues objectForKey:@"mass"];
-        NSString* longitudeText = [meteoriteValues objectForKey:@"reclat"];
-        NSString* latitudeText = [meteoriteValues objectForKey:@"reclong"];
+        NSString* latitudeText = [meteoriteValues objectForKey:@"reclat"];
+        NSString* longitudeText = [meteoriteValues objectForKey:@"reclong"];
         
         NSDateFormatter *dateFormat = [NSDateFormatter new];
         [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
