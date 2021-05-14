@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *errorView;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UITableView *meteoritesTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *errorImageView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) MeteoriteListDataSourceDelegate *meteoriteListDataSourceDelegate;
 
@@ -42,9 +43,19 @@
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL isVisibleChanged = weakSelf.errorImageView.hidden != success;
             [weakSelf.meteoritesTableView reloadData];
-            [weakSelf.refreshControl endRefreshing];
-            weakSelf.errorView.hidden = success;
+            [UIView animateWithDuration:1.0 animations:^{
+                weakSelf.errorView.hidden = success;
+                weakSelf.errorImageView.hidden = success;
+            } completion:^(BOOL finished) {
+                [weakSelf.refreshControl endRefreshing];
+                if ((!success) && (!isVisibleChanged)) {
+                    [self shakeView];
+                }
+            }];
+            
+            
         });
     }
 }
@@ -52,6 +63,17 @@
 - (void)refreshDataTapped
 {
     [_viewModel updateMeteorites];
+}
+
+-(void)shakeView
+{
+    CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"position"];
+    [shake setDuration:0.1];
+    [shake setRepeatCount:2];
+    [shake setAutoreverses:YES];
+    [shake setFromValue:[NSValue valueWithCGPoint:CGPointMake(_errorImageView.center.x - 5,_errorImageView.center.y)]];
+    [shake setToValue:[NSValue valueWithCGPoint:CGPointMake(_errorImageView.center.x + 5, _errorImageView.center.y)]];
+    [_errorImageView.layer addAnimation:shake forKey:@"position"];
 }
 
 @end

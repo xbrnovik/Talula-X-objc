@@ -9,6 +9,7 @@
 #import "MeteoriteListDataSourceDelegate.h"
 #import "Meteorite.h"
 #import "MasterViewModel.h"
+#import <QuartzCore/QuartzCore.h>
 
 @class MasterViewModel;
 

@@ -38,7 +38,7 @@
 {
     _name = meteorite.name;
     _mass = [NSNumber numberWithDouble:meteorite.mass];
-    _place = meteorite.place;
+    _place = meteorite.place ? meteorite.place : @"-";
 }
 
 - (void)setupFromMeteorite:(Meteorite *)meteorite

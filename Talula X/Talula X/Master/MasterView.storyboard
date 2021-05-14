@@ -70,6 +70,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorImageView" destination="xFA-e7-azz" id="QZA-fE-0Zy"/>
                         <outlet property="errorLabel" destination="DLk-CE-Ugj" id="cBj-YN-KaU"/>
                         <outlet property="errorView" destination="blJ-fb-MRx" id="P5B-kw-i5e"/>
                         <outlet property="meteoritesTableView" destination="vVh-zL-hgq" id="3Ua-v6-XfN"/>
