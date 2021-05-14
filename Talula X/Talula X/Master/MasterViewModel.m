@@ -17,14 +17,17 @@
 
 @implementation MasterViewModel
 
-- (instancetype)initWithMeteoriteService:(MeteoriteService *)service
+- (instancetype)initWithMeteoriteService:(MeteoriteService *)meteoriteService
+                         locationService:(LocationService *)locationService
                                  storage:(MeteoriteStorage *)storage
                               controller:(MasterViewController *)controller
 {
-    _service = service;
+    _meteoriteService = meteoriteService;
+    _locationService = locationService;
     _storage = storage;
     _controller = controller;
     self = [super init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sortMeteorites) name:@"didUpdateLocations" object:nil];
     return self;
 }
 
@@ -32,7 +35,7 @@
 {
     NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
     NSArray<CDMeteorite*>* storedMeteorites = [_storage storedMeteorites];
-    for (NSArray<CDMeteorite*>* storedMeteorite in storedMeteorites) {
+    for (CDMeteorite* storedMeteorite in storedMeteorites) {
         MeteoriteCellModel *model = [MeteoriteCellModel new];
         [model setupFromCDMeteorite:storedMeteorite];
         [newMeteorites addObject:model];
@@ -43,9 +46,9 @@
 
 - (void)updateMeteorites
 {
+    [_locationService requestPermission];
     NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
-    _meteorites = newMeteorites;
-    [_service meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
+    [_meteoriteService meteorites:^(MeteoriteResponse * _Nonnull meteoriteResponse) {
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         [weakSelf.storage storeMeteorites:meteoriteResponse.meteorites];
         for (Meteorite* downloadedMeteorite in meteoriteResponse.meteorites) {
@@ -53,19 +56,35 @@
             [model setupFromMeteorite:downloadedMeteorite];
             [newMeteorites addObject:model];
         }
+        weakSelf.meteorites = newMeteorites;
+        [weakSelf sortMeteorites];
         [weakSelf.controller reloadMeteoritesWithSuccess:YES];
     } failure:^(NSError * _Nonnull error) {
         __weak typeof(self) weakSelf = self; // :( not great not terrible
-        NSArray<CDMeteorite*>* storedMeteorites = [_storage storedMeteorites];
+        NSArray<CDMeteorite*>* storedMeteorites = [weakSelf.storage storedMeteorites];
         for (CDMeteorite* storedMeteorite in storedMeteorites) {
             MeteoriteCellModel *model = [MeteoriteCellModel new];
             [model setupFromCDMeteorite:storedMeteorite];
             [newMeteorites addObject:model];
         }
+        weakSelf.meteorites = newMeteorites;
+        [weakSelf sortMeteorites];
         [weakSelf.controller reloadMeteoritesWithSuccess:NO];
     } always:^{
         //NOTE: Happens always.
     }];
+}
+
+- (void)sortMeteorites
+{
+    NSArray<MeteoriteCellModel*>* sortedArray;
+    sortedArray = [_meteorites sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSNumber *first = [(MeteoriteCellModel*)a distanceFromLocation:_locationService.lastKnownLocation];
+        NSNumber *second = [(MeteoriteCellModel*)b distanceFromLocation:_locationService.lastKnownLocation];
+        return [first compare:second];
+    }];
+    _meteorites = sortedArray;
+    [_controller reloadMeteoritesWithSuccess:YES];
 }
 
 @end

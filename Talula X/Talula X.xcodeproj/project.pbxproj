@@ -26,6 +26,7 @@
 		23A59AFF264D56D60051707B /* MeteoriteCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AFE264D56D60051707B /* MeteoriteCellModel.m */; };
 		23A59B06264DBB870051707B /* CoreDataContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59B05264DBB870051707B /* CoreDataContainer.m */; };
 		23A59B0A264DD0DF0051707B /* MeteoriteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59B09264DD0DF0051707B /* MeteoriteStorage.m */; };
+		23C3B4A7264EBF9100401C1C /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C3B4A6264EBF9100401C1C /* LocationService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,8 @@
 		23A59B05264DBB870051707B /* CoreDataContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CoreDataContainer.m; path = Service/CoreDataContainer.m; sourceTree = "<group>"; };
 		23A59B08264DD0DF0051707B /* MeteoriteStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoriteStorage.h; sourceTree = "<group>"; };
 		23A59B09264DD0DF0051707B /* MeteoriteStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteStorage.m; sourceTree = "<group>"; };
+		23C3B4A5264EBF9100401C1C /* LocationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = SOURCE_ROOT; };
+		23C3B4A6264EBF9100401C1C /* LocationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 		23A59AF7264D42CD0051707B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				23C3B4A5264EBF9100401C1C /* LocationService.h */,
+				23C3B4A6264EBF9100401C1C /* LocationService.m */,
 				23A59AEE264D1FF50051707B /* MeteoriteService.h */,
 				23A59AEF264D1FF50051707B /* MeteoriteService.m */,
 				23A59AE6264D18B80051707B /* Model */,
@@ -240,6 +245,7 @@
 				232E612626494C920097D3D2 /* main.m in Sources */,
 				23A59B06264DBB870051707B /* CoreDataContainer.m in Sources */,
 				232E611826494C910097D3D2 /* MasterViewController.m in Sources */,
+				23C3B4A7264EBF9100401C1C /* LocationService.m in Sources */,
 				23A59B0A264DD0DF0051707B /* MeteoriteStorage.m in Sources */,
 				232E611226494C910097D3D2 /* AppDelegate.m in Sources */,
 				23A59AF0264D1FF50051707B /* MeteoriteService.m in Sources */,

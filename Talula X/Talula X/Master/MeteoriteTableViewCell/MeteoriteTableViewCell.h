@@ -17,6 +17,7 @@ extern NSString *const METEORITE_TABLEVIEW_CELL_IDENTIFIER;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *massLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 
 @end
 

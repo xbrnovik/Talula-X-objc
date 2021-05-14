@@ -28,19 +28,12 @@
     cell.massLabel.text = model.massRounded;
     cell.placeLabel.text = model.place;
     cell.iconImageView.image = model.icon;
+    cell.distanceLabel.text = model.lastDistance;
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _cellModels.count;
-}
-
-- (NSNumberFormatter *)localeFormatter
-{
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.minimumFractionDigits = 0;
-    formatter.maximumFractionDigits = 0;
-    return formatter;
 }
 
 @end
