@@ -24,6 +24,8 @@
 		23A59AF0264D1FF50051707B /* MeteoriteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AEF264D1FF50051707B /* MeteoriteService.m */; };
 		23A59AF5264D3DD20051707B /* MeteoriteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AF4264D3DD20051707B /* MeteoriteResponse.m */; };
 		23A59AFF264D56D60051707B /* MeteoriteCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59AFE264D56D60051707B /* MeteoriteCellModel.m */; };
+		23A59B06264DBB870051707B /* CoreDataContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59B05264DBB870051707B /* CoreDataContainer.m */; };
+		23A59B0A264DD0DF0051707B /* MeteoriteStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A59B09264DD0DF0051707B /* MeteoriteStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,10 @@
 		23A59AF4264D3DD20051707B /* MeteoriteResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteResponse.m; sourceTree = "<group>"; };
 		23A59AFD264D56D60051707B /* MeteoriteCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeteoriteCellModel.h; path = "Talula X/Service/Model/MeteoriteCellModel.h"; sourceTree = SOURCE_ROOT; };
 		23A59AFE264D56D60051707B /* MeteoriteCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MeteoriteCellModel.m; path = "Talula X/Service/Model/MeteoriteCellModel.m"; sourceTree = SOURCE_ROOT; };
+		23A59B04264DBB870051707B /* CoreDataContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CoreDataContainer.h; path = Service/CoreDataContainer.h; sourceTree = "<group>"; };
+		23A59B05264DBB870051707B /* CoreDataContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CoreDataContainer.m; path = Service/CoreDataContainer.m; sourceTree = "<group>"; };
+		23A59B08264DD0DF0051707B /* MeteoriteStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeteoriteStorage.h; sourceTree = "<group>"; };
+		23A59B09264DD0DF0051707B /* MeteoriteStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeteoriteStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,10 @@
 		232E610F26494C910097D3D2 /* Talula X */ = {
 			isa = PBXGroup;
 			children = (
+				23A59B04264DBB870051707B /* CoreDataContainer.h */,
+				23A59B05264DBB870051707B /* CoreDataContainer.m */,
+				23A59B08264DD0DF0051707B /* MeteoriteStorage.h */,
+				23A59B09264DD0DF0051707B /* MeteoriteStorage.m */,
 				232E611026494C910097D3D2 /* AppDelegate.h */,
 				232E611126494C910097D3D2 /* AppDelegate.m */,
 				232E611326494C910097D3D2 /* SceneDelegate.h */,
@@ -228,7 +238,9 @@
 				23A59AF5264D3DD20051707B /* MeteoriteResponse.m in Sources */,
 				23A59AE0264BD4D00051707B /* MeteoriteListDataSourceDelegate.m in Sources */,
 				232E612626494C920097D3D2 /* main.m in Sources */,
+				23A59B06264DBB870051707B /* CoreDataContainer.m in Sources */,
 				232E611826494C910097D3D2 /* MasterViewController.m in Sources */,
+				23A59B0A264DD0DF0051707B /* MeteoriteStorage.m in Sources */,
 				232E611226494C910097D3D2 /* AppDelegate.m in Sources */,
 				23A59AF0264D1FF50051707B /* MeteoriteService.m in Sources */,
 				23A59AFF264D56D60051707B /* MeteoriteCellModel.m in Sources */,

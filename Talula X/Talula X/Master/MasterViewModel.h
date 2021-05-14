@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Meteorite.h"
+#import "MeteoriteCellModel.h"
 #import "MeteoriteService.h"
+#import "MeteoriteStorage.h"
 
 @class MasterViewController;
 
@@ -15,9 +16,11 @@
 @interface MasterViewModel : NSObject
 
 @property (strong, nonatomic) MeteoriteService * service;
-@property (readonly, nonatomic) NSMutableArray<Meteorite *> * meteorites; //NOTE: private(set) => readonly + writeonly
+@property (strong, nonatomic) MeteoriteStorage * storage;
+@property (readonly, nonatomic) NSMutableArray<MeteoriteCellModel *> * meteorites; //NOTE: private(set) => readonly + writeonly
 
 - (instancetype)initWithMeteoriteService:(MeteoriteService *)service
+                                 storage:(MeteoriteStorage *)storage
                               controller:(MasterViewController *)controller;
 - (void)updateMeteorites;
 

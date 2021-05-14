@@ -9,23 +9,34 @@
 
 @implementation MeteoriteCellModel
 
-@synthesize name = _name;
 @synthesize mass = _mass;
-@synthesize place = _place;
-
-- (NSString *)name
-{
-    return @"Nejaky meteorit";
-}
 
 - (NSNumber *)mass
 {
     return @1000;
 }
 
-- (NSString *)place
+- (void)setupFromCDMeteorite:(CDMeteorite *)meteorite
 {
-    return @"Nejaka krajina";
+    _name = meteorite.name;
+    NSNumber *massNumber = [NSNumber numberWithDouble:meteorite.mass];
+    _mass = [[self localeFormatter] stringFromNumber:massNumber]; // :( not great, not terrible
+    _place = meteorite.place;
+}
+
+- (NSNumberFormatter *)localeFormatter
+{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.minimumFractionDigits = 0;
+    formatter.maximumFractionDigits = 0;
+    return formatter;
+}
+
+- (void)setupFromMeteorite:(Meteorite *)meteorite
+{
+    _name = meteorite.name;
+    _mass = [[self localeFormatter] stringFromNumber:meteorite.mass]; // :( not great, not terrible
+    _place = meteorite.place;
 }
 
 @end

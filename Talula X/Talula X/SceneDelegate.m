@@ -34,7 +34,7 @@
 }
 
 - (void)sceneDidEnterBackground:(UIScene *)scene {
-    [(AppDelegate *)UIApplication.sharedApplication.delegate saveContext];
+    //TODO: save on background ? [(AppDelegate *)UIApplication.sharedApplication.delegate saveContext];
 }
 
 

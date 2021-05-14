@@ -64,10 +64,10 @@
                     NSString *country = placemark.country;
                     NSString *administrativeArea = (placemark.name != placemark.administrativeArea)
                                                     ? placemark.administrativeArea
-                                                    : @"";
+                                                    : nil;
                     meteorite.place = [[NSArray arrayWithObjects:name, country, administrativeArea, nil] componentsJoinedByString:@","];
                 } failure:^(NSError * _Nonnull error) {
-                    // TODO: log error
+                    NSLog(@"Meteorite location unavailable with error: %@", error);
                 } always:^{
                     dispatch_group_leave(group);
                 }];
