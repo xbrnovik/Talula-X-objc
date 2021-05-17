@@ -6,12 +6,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MeteoriteListDataSourceDelegate.h"
+#import "Meteorite.h"
+#import "MasterViewModel.h"
+#import <QuartzCore/QuartzCore.h>
 
 @class MasterViewModel;
 
 @interface MasterViewController : UIViewController
 
 @property (strong, nonatomic) MasterViewModel * viewModel;
+
+- (void)reloadMeteoritesWithSuccess:(BOOL)success;
+- (void)reloadMeteorites;
 
 @end
 

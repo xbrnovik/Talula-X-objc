@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MeteoriteService.h"
+#import "MasterViewController.h"
+#import "MasterViewModel.h"
 
 @interface AppCoordinator : NSObject
 

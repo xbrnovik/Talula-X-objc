@@ -15,7 +15,6 @@
 
 @implementation SceneDelegate
 
-
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions
 {
     if (scene != nil) {
@@ -32,10 +31,5 @@
         [[AppCoordinator new] showHomeFromNavigationController:navigationController];
     }
 }
-
-- (void)sceneDidEnterBackground:(UIScene *)scene {
-    [(AppDelegate *)UIApplication.sharedApplication.delegate saveContext];
-}
-
 
 @end

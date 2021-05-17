@@ -17,7 +17,9 @@
 - (void)showHomeFromNavigationController:(UINavigationController *)navigationController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MasterView" bundle:nil];
-    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
+    MasterViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
+    MasterViewModel *viewModel = [[MasterViewModel alloc] initWithMeteoriteService:[MeteoriteService new] locationService:[LocationService new] storage:[MeteoriteStorage new] controller:controller];
+    controller.viewModel = viewModel;
     [navigationController pushViewController:controller animated:YES];
 }
 
