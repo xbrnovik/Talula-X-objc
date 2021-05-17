@@ -14,11 +14,20 @@
 @implementation AppCoordinator
 
 
-- (void)showHomeFromNavigationController:(UINavigationController *)navigationController
+- (void)showMasterFromNavigationController:(UINavigationController *)navigationController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MasterView" bundle:nil];
     MasterViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"MasterViewIdentifier"];
     MasterViewModel *viewModel = [[MasterViewModel alloc] initWithMeteoriteService:[MeteoriteService new] locationService:[LocationService new] storage:[MeteoriteStorage new] controller:controller];
+    controller.viewModel = viewModel;
+    [navigationController pushViewController:controller animated:YES];
+}
+
+- (void)showDetailFromNavigationController:(UINavigationController *)navigationController
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"DetailView" bundle:nil];
+    DetailViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"DetailViewIdentifier"];
+    DetailViewModel *viewModel = [[DetailViewModel alloc] initWithMeteoriteService:[MeteoriteService new] locationService:[LocationService new] storage:[MeteoriteStorage new] controller:controller];
     controller.viewModel = viewModel;
     [navigationController pushViewController:controller animated:YES];
 }

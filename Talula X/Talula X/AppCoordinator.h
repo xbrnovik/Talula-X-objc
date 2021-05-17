@@ -7,12 +7,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 #import "MeteoriteService.h"
+
 #import "MasterViewController.h"
 #import "MasterViewModel.h"
 
+#import "Detail/DetailViewModel.h"
+#import "Detail/DetailViewController.h"
+
 @interface AppCoordinator : NSObject
 
-- (void)showHomeFromNavigationController:(UINavigationController *)navigationController;
+- (void)showMasterFromNavigationController:(UINavigationController *)navigationController;
+- (void)showDetailFromNavigationController:(UINavigationController *)navigationController;
 
 @end

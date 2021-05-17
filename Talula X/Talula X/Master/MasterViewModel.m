@@ -90,7 +90,31 @@
         return [first compare:second];
     }];
     _meteorites = [sortedArray mutableCopy];
+    [self setHandlers];
     [_controller reloadMeteorites];
+}
+
+- (void)setHandlers
+{
+    SelectedRowHandler selectedRowHandler = ^(NSIndexPath *indexPath) {
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        //TODO: show detail with _meteorites[indexPath.row]
+        [weakSelf showDetail];
+    };
+    
+    for (MeteoriteCellModel *model in _meteorites) {
+        model.handler = selectedRowHandler;
+    }
+}
+
+#pragma mark - Navigate
+
+- (void)showDetail
+{
+    UINavigationController *navigationController = _controller.navigationController;
+    if (navigationController) {
+        [[AppCoordinator new] showDetailFromNavigationController:navigationController];
+    }
 }
 
 @end

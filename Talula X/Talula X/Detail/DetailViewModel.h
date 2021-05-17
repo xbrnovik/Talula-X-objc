@@ -1,33 +1,30 @@
 //
-//  MasterViewModel.h
+//  DetailViewModel.h
 //  Talula X
 //
-//  Created by Diana Brnovik on 11/05/2021.
+//  Created by Diana Brnovik on 17/05/2021.
 //
 
 #import <Foundation/Foundation.h>
-#import "MeteoriteCellModel.h"
 #import "MeteoriteService.h"
 #import "MeteoriteStorage.h"
 #import "LocationService.h"
-#import "AppCoordinator.h"
 
-@class MasterViewController;
+@class DetailViewController;
 
+NS_ASSUME_NONNULL_BEGIN
 
-@interface MasterViewModel : NSObject
+@interface DetailViewModel : NSObject
 
 @property (strong, nonatomic) MeteoriteService * meteoriteService;
 @property (strong, nonatomic) LocationService * locationService;
 @property (strong, nonatomic) MeteoriteStorage * storage;
-@property (readonly, nonatomic) NSMutableArray<MeteoriteCellModel *> * meteorites; //NOTE: private(set) => readonly + writeonly
 
 - (instancetype)initWithMeteoriteService:(MeteoriteService *)meteoriteService
                          locationService:(LocationService *)locationService
                                  storage:(MeteoriteStorage *)storage
-                              controller:(MasterViewController *)controller;
-- (void)updateMeteorites;
-- (void)sortMeteorites;
-- (void)showDetail;
+                              controller:(DetailViewController *)controller;
 
 @end
+
+NS_ASSUME_NONNULL_END
