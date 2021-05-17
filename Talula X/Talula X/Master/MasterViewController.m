@@ -44,8 +44,8 @@
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
             BOOL isVisibleChanged = weakSelf.errorImageView.hidden != success;
-            [weakSelf.meteoritesTableView reloadData];
             [UIView animateWithDuration:1.0 animations:^{
+                [weakSelf.meteoritesTableView reloadData];
                 weakSelf.errorView.hidden = success;
                 weakSelf.errorImageView.hidden = success;
             } completion:^(BOOL finished) {
@@ -58,6 +58,16 @@
             
         });
     }
+}
+
+- (void)reloadMeteorites
+{
+    __weak typeof(self) weakSelf = self; // :( not great not terrible
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:1.0 animations:^{
+            [weakSelf.meteoritesTableView reloadData];
+        } completion:nil];
+    });
 }
 
 - (void)refreshDataTapped

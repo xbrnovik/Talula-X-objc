@@ -11,7 +11,7 @@
 @interface MasterViewModel ()
 
 @property (weak, nonatomic) MasterViewController * controller;
-@property (readwrite, assign) NSMutableArray<MeteoriteCellModel *> * meteorites;
+@property (readwrite, strong) NSMutableArray<MeteoriteCellModel *> * meteorites;
 
 @end
 
@@ -83,7 +83,7 @@
         NSNumber *second = [(MeteoriteCellModel*)b distanceFromLocation:_locationService.lastKnownLocation];
         return [first compare:second];
     }];
-    _meteorites = sortedArray;
+    _meteorites = [sortedArray mutableCopy];
     [_controller reloadMeteoritesWithSuccess:YES];
 }
 
