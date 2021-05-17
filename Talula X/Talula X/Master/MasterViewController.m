@@ -36,6 +36,8 @@
     [_viewModel updateMeteorites];
 }
 
+#pragma mark - Reload
+
 - (void)reloadMeteoritesWithSuccess:(BOOL)success
 {
     if (_meteoritesTableView != nil) {
@@ -75,10 +77,14 @@
    
 }
 
+#pragma mark - Tapped
+
 - (void)refreshDataTapped
 {
     [_viewModel updateMeteorites];
 }
+
+#pragma mark - Animations
 
 - (void)shakeView
 {

@@ -50,6 +50,8 @@
     }
 }
 
+#pragma mark - Store
+
 - (void)storeMeteorites:(NSArray<Meteorite*>*)meteorites
 {
     // fetch
@@ -111,6 +113,8 @@
        NSLog(@"Performed fetch.");
     };
 }
+
+#pragma mark - Offline load
 
 - (NSArray<CDMeteorite*>*)storedMeteorites
 {

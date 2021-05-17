@@ -20,7 +20,7 @@
 
 - (NSString *)massRounded
 {
-    NSString *massRoundedText = [[self localeFormatter] stringFromNumber:_mass]; // :( not great, not terrible;
+    NSString *massRoundedText = [self.localeFormatter stringFromNumber:_mass]; // :( not great, not terrible;
     return [NSString stringWithFormat:@"%@ g", massRoundedText];
 }
 
@@ -34,6 +34,8 @@
         return [UIImage imageNamed:@"OtherMeteorite"];
     }
 }
+
+#pragma mark - Setup
 
 - (void)setupFromCDMeteorite:(CDMeteorite *)meteorite
 {
@@ -53,6 +55,8 @@
     _longitude = meteorite.longitude;
 }
 
+#pragma mark - Calculate
+
 - (NSNumber *)distanceFromLocation:(CLLocation *)location
 {
     CLLocation *meteoriteLocation = [[CLLocation alloc] initWithLatitude:[_latitude doubleValue] longitude:[_longitude doubleValue]];
@@ -64,6 +68,8 @@
     _lastDistance = distancePretty;
     return distance;
 }
+
+#pragma mark - Formatters
 
 - (NSNumberFormatter *)localeFormatter
 {

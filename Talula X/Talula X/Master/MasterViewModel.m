@@ -31,6 +31,8 @@
     return self;
 }
 
+#pragma mark - Load meteorites offline
+
 - (void)loadMeteorites
 {
     NSMutableArray<MeteoriteCellModel *> * newMeteorites = [NSMutableArray new];
@@ -43,6 +45,8 @@
     _meteorites = newMeteorites;
     [_controller reloadMeteoritesWithSuccess:NO];
 }
+
+#pragma mark - Load new meteorites online
 
 - (void)updateMeteorites
 {
@@ -74,6 +78,8 @@
         //NOTE: Happens always.
     }];
 }
+
+#pragma mark - Sort
 
 - (void)sortMeteorites
 {
