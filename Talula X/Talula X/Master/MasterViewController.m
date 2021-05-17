@@ -62,12 +62,17 @@
 
 - (void)reloadMeteorites
 {
-    __weak typeof(self) weakSelf = self; // :( not great not terrible
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:1.0 animations:^{
-            [weakSelf.meteoritesTableView reloadData];
-        } completion:nil];
-    });
+    if (_meteoritesTableView != nil) {
+        NSArray<MeteoriteCellModel*>* models = [_viewModel meteorites];
+        _meteoriteListDataSourceDelegate.cellModels = models;
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:1.0 animations:^{
+                [weakSelf.meteoritesTableView reloadData];
+            } completion:nil];
+        });
+    }
+   
 }
 
 - (void)refreshDataTapped
@@ -75,7 +80,7 @@
     [_viewModel updateMeteorites];
 }
 
--(void)shakeView
+- (void)shakeView
 {
     CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"position"];
     [shake setDuration:0.1];

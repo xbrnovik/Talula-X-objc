@@ -11,13 +11,10 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     if (locations.count > 0 ) {
-        CLLocation *currentLocation = locations[0];
+        CLLocation *currentLocation = locations.firstObject;
         NSLog(@"New location latitude %f and longitude %f.", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         _lastKnownLocation = currentLocation;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"didUpdateLocations" object:nil];
-        if (_lastKnownLocation) {
-            [_locationManager stopUpdatingLocation];
-        }
     }
 }
 
@@ -27,6 +24,14 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
+}
+
+- (void)dealloc
+{
+    if (_lastKnownLocation) {
+        [_locationManager stopUpdatingLocation];
+        [[NSNotificationCenter defaultCenter] removeObserver:@"didUpdateLocations"];
+    }
 }
 
 @end

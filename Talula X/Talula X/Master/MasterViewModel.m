@@ -84,7 +84,7 @@
         return [first compare:second];
     }];
     _meteorites = [sortedArray mutableCopy];
-    [_controller reloadMeteoritesWithSuccess:YES];
+    [_controller reloadMeteorites];
 }
 
 @end

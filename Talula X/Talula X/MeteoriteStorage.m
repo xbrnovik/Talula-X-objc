@@ -81,15 +81,15 @@
     NSError *deleteError = nil;
     [[[[CoreDataContainer new] persistentContainer ] persistentStoreCoordinator] executeRequest:batchDeleteRequest withContext:managedObjectContext error:&deleteError];
     //add
-    for (CDMeteorite* meteorite in meteorites) {
+    for (Meteorite* meteorite in meteorites) {
         CDMeteorite *newMeteorite = [NSEntityDescription insertNewObjectForEntityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
         newMeteorite.place = meteorite.place;
         newMeteorite.category = meteorite.category;
         newMeteorite.identifier = meteorite.identifier;
         newMeteorite.year = meteorite.year;
-        newMeteorite.latitude = meteorite.latitude;
-        newMeteorite.longitude = meteorite.longitude;
-        newMeteorite.mass = meteorite.mass;
+        newMeteorite.latitude = [meteorite.latitude doubleValue];
+        newMeteorite.longitude = [meteorite.longitude doubleValue];
+        newMeteorite.mass = [meteorite.mass doubleValue];
         newMeteorite.name = meteorite.name;
     }
     //save
