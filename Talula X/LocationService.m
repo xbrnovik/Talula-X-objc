@@ -14,7 +14,11 @@
         CLLocation *currentLocation = locations[0];
         NSLog(@"New location latitude %f and longitude %f.", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         _lastKnownLocation = currentLocation;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"didUpdateLocations" object:nil];    }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"didUpdateLocations" object:nil];
+        if (_lastKnownLocation) {
+            [_locationManager stopUpdatingLocation];
+        }
+    }
 }
 
 - (void)requestPermission
