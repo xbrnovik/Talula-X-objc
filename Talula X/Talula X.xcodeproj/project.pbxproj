@@ -30,6 +30,7 @@
 		23C3B4C72652893A00401C1C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C3B4C62652893A00401C1C /* DetailViewController.m */; };
 		23C3B4CC2652895900401C1C /* DetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C3B4CB2652895900401C1C /* DetailViewModel.m */; };
 		23C3B4CF26528D0D00401C1C /* DetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C3B4CE26528D0D00401C1C /* DetailView.storyboard */; };
+		23C3B4D62652BB0100401C1C /* SeenMeteoriteCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23C3B4D52652BB0100401C1C /* SeenMeteoriteCollectionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		23C3B4CA2652895900401C1C /* DetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewModel.h; sourceTree = "<group>"; };
 		23C3B4CB2652895900401C1C /* DetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewModel.m; sourceTree = "<group>"; };
 		23C3B4CE26528D0D00401C1C /* DetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = DetailView.storyboard; path = "Talula X/DetailView.storyboard"; sourceTree = SOURCE_ROOT; };
+		23C3B4D52652BB0100401C1C /* SeenMeteoriteCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeenMeteoriteCollectionView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,13 +183,22 @@
 		23C3B4C92652894000401C1C /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				23C3B4C52652893A00401C1C /* DetailViewController.h */,
-				23C3B4C62652893A00401C1C /* DetailViewController.m */,
 				23C3B4CA2652895900401C1C /* DetailViewModel.h */,
 				23C3B4CB2652895900401C1C /* DetailViewModel.m */,
+				23C3B4C52652893A00401C1C /* DetailViewController.h */,
+				23C3B4C62652893A00401C1C /* DetailViewController.m */,
+				23C3B4D82652C43400401C1C /* CollectionViewCell */,
 				23C3B4CE26528D0D00401C1C /* DetailView.storyboard */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		23C3B4D82652C43400401C1C /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				23C3B4D52652BB0100401C1C /* SeenMeteoriteCollectionView.xib */,
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 			files = (
 				23A59ADA264BCB770051707B /* MeteoriteTableViewCell.xib in Resources */,
 				232E612326494C920097D3D2 /* LaunchScreen.storyboard in Resources */,
+				23C3B4D62652BB0100401C1C /* SeenMeteoriteCollectionView.xib in Resources */,
 				232E612026494C920097D3D2 /* Assets.xcassets in Resources */,
 				23C3B4CF26528D0D00401C1C /* DetailView.storyboard in Resources */,
 				23A59ACA264BB0520051707B /* MasterView.storyboard in Resources */,
