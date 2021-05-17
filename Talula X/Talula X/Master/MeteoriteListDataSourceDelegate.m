@@ -44,6 +44,7 @@
 {
     MeteoriteCellModel *model = _cellModels[indexPath.row];
     model.handler(indexPath); // ??? :( Not great not terrible
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
