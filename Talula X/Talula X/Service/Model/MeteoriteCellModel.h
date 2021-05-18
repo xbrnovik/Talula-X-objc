@@ -27,7 +27,7 @@ typedef void(^SelectedRowHandler)(NSIndexPath *indexPath);
 @property (strong, nonatomic) NSString *distance;
 @property (nonatomic) SelectedRowHandler handler;
 
-- (void)setupFromMeteorite:(Meteorite *)meteorite;
+- (instancetype)initFromMeteorite:(Meteorite *)meteorite;
 
 @end
 

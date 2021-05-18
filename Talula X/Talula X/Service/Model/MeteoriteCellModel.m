@@ -20,6 +20,18 @@
 @synthesize icon = _icon;
 @synthesize distance = _distance;
 
+- (instancetype)initFromMeteorite:(Meteorite *)meteorite
+{
+    _name = meteorite.name;
+    _mass = meteorite.mass;
+    _place = meteorite.place;
+    _latitude = meteorite.latitude;
+    _longitude = meteorite.longitude;
+    _lastDistance = meteorite.lastDistance;
+    self = [super init];
+    return self;
+}
+
 - (NSString *)massRounded 
 {
     NSString *massRoundedText = [self.localeFormatter stringFromNumber:_mass]; // :( not great, not terrible;
@@ -43,18 +55,6 @@
     distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
     NSString *distancePretty = [distanceFormatter stringFromDistance:[_lastDistance doubleValue]];
     return distancePretty;
-}
-
-#pragma mark - Setup
-
-- (void)setupFromMeteorite:(Meteorite *)meteorite
-{
-    _name = meteorite.name;
-    _mass = meteorite.mass;
-    _place = meteorite.place;
-    _latitude = meteorite.latitude;
-    _longitude = meteorite.longitude;
-    _lastDistance = meteorite.lastDistance;
 }
 
 #pragma mark - Formatters

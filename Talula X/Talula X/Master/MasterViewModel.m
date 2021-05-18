@@ -36,8 +36,7 @@
 {
     NSMutableArray<MeteoriteCellModel *> * models = [NSMutableArray new];
     for (Meteorite* meteorite in _meteorites) {
-        MeteoriteCellModel *model = [MeteoriteCellModel new];
-        [model setupFromMeteorite:meteorite];
+        MeteoriteCellModel *model = [[MeteoriteCellModel alloc] initFromMeteorite:meteorite];
         [models addObject:model];
     }
     _meteoriteCellModels = models;
