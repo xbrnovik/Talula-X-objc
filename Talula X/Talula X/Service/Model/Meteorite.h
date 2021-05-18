@@ -6,6 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDMeteorite+CoreDataClass.h"
+#import "CDMeteorite+CoreDataProperties.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *mass;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *place;
+@property (strong, nonatomic) NSNumber *lastDistance;
+
+- (void)setupFromCDMeteorite:(CDMeteorite *)meteorite;
+- (NSNumber *)distanceFromLocation:(CLLocation *)location;
 
 @end
 

@@ -31,7 +31,7 @@
     cell.massLabel.text = model.massRounded;
     cell.placeLabel.text = model.place;
     cell.iconImageView.image = model.icon;
-    cell.distanceLabel.text = model.lastDistance;
+    cell.distanceLabel.text = model.distance;
     return cell;
 }
 

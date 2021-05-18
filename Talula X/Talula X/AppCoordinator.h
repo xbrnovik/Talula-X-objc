@@ -19,6 +19,6 @@
 @interface AppCoordinator : NSObject
 
 - (void)showMasterFromNavigationController:(UINavigationController *)navigationController;
-- (void)showDetailFromNavigationController:(UINavigationController *)navigationController;
-
+- (void)showDetailFromNavigationController:(UINavigationController *)navigationController
+                             withMeteorite:(Meteorite *)meteorite;
 @end

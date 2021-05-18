@@ -24,12 +24,10 @@ typedef void(^SelectedRowHandler)(NSIndexPath *indexPath);
 @property (strong, nonatomic) UIImage *icon;
 @property (strong, nonatomic) NSNumber *latitude;
 @property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSString *lastDistance;
+@property (strong, nonatomic) NSString *distance;
 @property (nonatomic) SelectedRowHandler handler;
 
-- (void)setupFromCDMeteorite:(CDMeteorite *)meteorite;
 - (void)setupFromMeteorite:(Meteorite *)meteorite;
-- (NSNumber *)distanceFromLocation:(CLLocation *)location;
 
 @end
 

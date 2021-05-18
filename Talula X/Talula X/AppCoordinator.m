@@ -24,6 +24,7 @@
 }
 
 - (void)showDetailFromNavigationController:(UINavigationController *)navigationController
+                             withMeteorite:(Meteorite *)meteorite
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"DetailView" bundle:nil];
     DetailViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"DetailViewIdentifier"];
