@@ -56,8 +56,6 @@
                     [self shakeView];
                 }
             }];
-            
-            
         });
     }
 }
@@ -74,7 +72,6 @@
             } completion:nil];
         });
     }
-   
 }
 
 #pragma mark - Tapped
