@@ -6,13 +6,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "DetailViewModel.h"
+#import "Meteorite.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) DetailViewModel * viewModel;
+@property (strong, nonatomic) Meteorite * meteorite;
 
 @end
 
