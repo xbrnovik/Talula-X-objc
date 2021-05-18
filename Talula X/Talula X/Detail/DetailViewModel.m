@@ -32,7 +32,7 @@
 
 - (NSString *)currentPlace
 {
-    return @"to Bratislava";
+    return _locationService.lastKnownLocationName;
 }
 
 - (NSString *)pinnedPlace
@@ -42,7 +42,10 @@
 
 - (NSString *)distanceToCurrentPlaceLabel
 {
-    return @"989787 miles";
+    MKDistanceFormatter *distanceFormatter = [[MKDistanceFormatter alloc]init];
+    distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
+    NSString *distancePretty = [distanceFormatter stringFromDistance:[_meteorite.lastDistance doubleValue]];
+    return distancePretty;
 }
 
 - (NSString *)distanceToPinnedPlaceLabel

@@ -18,6 +18,8 @@
 
 @interface AppCoordinator : NSObject
 
++ (AppCoordinator *) shared;
+
 - (void)showMasterFromNavigationController:(UINavigationController *)navigationController;
 - (void)showDetailFromNavigationController:(UINavigationController *)navigationController
                              withMeteorite:(Meteorite *)meteorite;

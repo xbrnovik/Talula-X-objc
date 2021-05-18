@@ -28,7 +28,7 @@
         _window.rootViewController = navigationController;
         [_window makeKeyAndVisible];
         
-        [[AppCoordinator new] showMasterFromNavigationController:navigationController];
+        [[AppCoordinator shared] showMasterFromNavigationController:navigationController];
     }
 }
 

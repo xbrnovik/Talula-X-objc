@@ -129,7 +129,7 @@
 {
     UINavigationController *navigationController = _controller.navigationController;
     if ((navigationController) && (meteorite)) {
-        [[AppCoordinator new] showDetailFromNavigationController:navigationController withMeteorite:meteorite];
+        [[AppCoordinator shared] showDetailFromNavigationController:navigationController withMeteorite:meteorite];
     }
 }
 
