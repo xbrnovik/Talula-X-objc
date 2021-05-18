@@ -19,6 +19,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nWL-2f-Vzc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="682"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="xtQ-yL-9tt" appends="YES" id="Klg-dW-a1k"/>
+                                </connections>
                             </mapView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5V-z7-R0e">
                                 <rect key="frame" x="30" y="523.66666666666663" width="315" height="138.33333333333337"/>
@@ -147,8 +151,10 @@
                         <outlet property="coordinatesLabel" destination="XDH-nN-XmG" id="VOK-Hx-uYX"/>
                         <outlet property="distanceToCurrentPlaceLabel" destination="5YJ-si-omu" id="Hae-xq-ZsQ"/>
                         <outlet property="distanceToPinnedPlaceLabel" destination="rss-GQ-FTT" id="fJw-aL-AIR"/>
+                        <outlet property="gestureRecognizer" destination="xtQ-yL-9tt" id="Sqn-S5-xcF"/>
                         <outlet property="mapView" destination="nWL-2f-Vzc" id="NqW-JR-ncM"/>
                         <outlet property="nameLabel" destination="6XJ-kA-3nz" id="MvL-PR-QyB"/>
+                        <outlet property="pinnedPlaceStackView" destination="wXI-rf-EMC" id="vwB-dN-btz"/>
                         <outlet property="placeLabel" destination="pFB-Yt-qIP" id="Sxe-Nn-p3c"/>
                         <outlet property="toCurrentPlaceLabel" destination="kfp-ed-c2O" id="JQP-bj-ZL7"/>
                         <outlet property="toPinnedPlaceLabel" destination="aub-D2-hbo" id="YK7-aP-bSb"/>
@@ -156,6 +162,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UIi-67-fvG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="xtQ-yL-9tt">
+                    <connections>
+                        <action selector="longPressedGesture:" destination="0CK-zx-zVL" id="eUK-aI-tjZ"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-160.80000000000001" y="172.16748768472908"/>
         </scene>

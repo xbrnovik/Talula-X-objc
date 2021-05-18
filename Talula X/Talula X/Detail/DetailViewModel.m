@@ -6,6 +6,7 @@
 //
 
 #import "DetailViewModel.h"
+#import "DetailViewController.h"
 
 @interface DetailViewModel ()
 
@@ -30,27 +31,17 @@
     return self;
 }
 
-- (NSString *)currentPlace
+- (NSString *)currentPlaceName
 {
     return _locationService.lastKnownLocationName;
 }
 
-- (NSString *)pinnedPlace
-{
-    return @"to Brno";
-}
-
-- (NSString *)distanceToCurrentPlaceLabel
+- (NSString *)distanceToCurrentPlace
 {
     MKDistanceFormatter *distanceFormatter = [[MKDistanceFormatter alloc]init];
     distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
     NSString *distancePretty = [distanceFormatter stringFromDistance:[_meteorite.lastDistance doubleValue]];
     return distancePretty;
-}
-
-- (NSString *)distanceToPinnedPlaceLabel
-{
-    return @"966687 miles";
 }
 
 - (NSString *)year
@@ -64,7 +55,28 @@
 - (NSString *)coordinates
 {
     return [NSString stringWithFormat:@"%@, %@", _meteorite.latitude, _meteorite.longitude];
+}
 
+- (void)placePinFromGesture:(CLLocation *)location
+{
+    [_meteoriteService placemarkFromLocation:location success:^(CLPlacemark * _Nonnull placemark) {
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        NSNumber *distance = [weakSelf.meteorite distanceFromLocation:location];
+        [weakSelf.controller setPinnedPlaceName:placemark.name
+                                    andDistance:[weakSelf prettyFormatDistance:distance]];
+    } failure:^(NSError * _Nonnull error) {
+        //TODO: Error state.
+    } always:^{
+        //NOTE: Happens always.
+    }];
+}
+
+- (NSString *)prettyFormatDistance:(NSNumber *)distance
+{
+    MKDistanceFormatter *distanceFormatter = [[MKDistanceFormatter alloc]init];
+    distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
+    NSString *distancePretty = [distanceFormatter stringFromDistance:[distance doubleValue]];
+    return distancePretty;
 }
 
 @end

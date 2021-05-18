@@ -17,6 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceToCurrentPlaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceToPinnedPlaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
+@property (weak, nonatomic) IBOutlet UILongPressGestureRecognizer *gestureRecognizer;
+
+@property (weak, nonatomic) IBOutlet UIStackView *pinnedPlaceStackView;
+@property (weak, nonatomic) MKPointAnnotation *meteoriteAnnotation;
+@property (weak, nonatomic) MKPointAnnotation *pinnedAnnotation;
 
 @end
 
@@ -26,18 +31,13 @@
 {
     [super viewDidLoad];
     self.title = @"";
-    
     self.nameLabel.text = _viewModel.meteorite.name;
     self.placeLabel.text = _viewModel.meteorite.place;
-    
     self.coordinatesLabel.text = _viewModel.coordinates;
-    
-    self.toCurrentPlaceLabel.text = _viewModel.currentPlace;
-    self.toPinnedPlaceLabel.text = _viewModel.pinnedPlace;
-    self.distanceToCurrentPlaceLabel.text = _viewModel.distanceToCurrentPlaceLabel;
-    self.distanceToPinnedPlaceLabel.text = _viewModel.distanceToPinnedPlaceLabel;
-    
+    self.toCurrentPlaceLabel.text = _viewModel.currentPlaceName;
+    self.distanceToCurrentPlaceLabel.text = _viewModel.distanceToCurrentPlace;
     self.yearLabel.text = _viewModel.year;
+    self.pinnedPlaceStackView.hidden = YES;
     
     [self setupMap];
 }
@@ -55,6 +55,7 @@
                                                                         subtitle:_viewModel.meteorite.place];
     [_mapView addAnnotation:annotation];
     [_mapView setRegion:region];
+    _meteoriteAnnotation = annotation;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -63,6 +64,38 @@
     if (_mapView.annotations.count> 0) {
         [_mapView removeAnnotations:_mapView.annotations];
     }
+}
+
+- (IBAction)longPressedGesture:(id)sender {
+    if (_gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSMutableArray *annotationsToRemove = [NSMutableArray new];
+        for (id annotation in _mapView.annotations){
+            if (annotation != _meteoriteAnnotation) {
+                [annotationsToRemove addObject:annotation];
+            }
+        }
+        [_mapView removeAnnotations:annotationsToRemove];
+        
+        CGPoint point = [_gestureRecognizer locationInView:_mapView];
+        CLLocationCoordinate2D coordinates = [_mapView convertPoint:point toCoordinateFromView:_mapView];
+        
+        
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] initWithCoordinate:coordinates];
+        [_mapView addAnnotation:annotation];
+        
+        _pinnedAnnotation = annotation;
+        CLLocation *pinLocation = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
+        [_viewModel placePinFromGesture:pinLocation];
+    }
+}
+
+- (void)setPinnedPlaceName:(NSString *)name
+                andDistance:(NSString *)distance
+{
+    _placeLabel.text = name;
+    _distanceToPinnedPlaceLabel.text = distance;
+    _pinnedAnnotation.title = name;
+    _pinnedPlaceStackView.hidden = NO;
 }
 
 @end

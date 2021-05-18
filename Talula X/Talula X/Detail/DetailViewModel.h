@@ -21,20 +21,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) MeteoriteStorage * storage;
 @property (strong, nonatomic) Meteorite * meteorite;
 
-@property (readonly, nonatomic) NSString * currentPlace;
-@property (readonly, nonatomic) NSString * pinnedPlace;
-@property (readonly, nonatomic) NSString * distanceToCurrentPlaceLabel;
-@property (readonly, nonatomic) NSString * distanceToPinnedPlaceLabel;
 @property (readonly, nonatomic) NSString * year;
 @property (readonly, nonatomic) NSString * name;
 @property (readonly, nonatomic) NSString * place;
 @property (readonly, nonatomic) NSString * coordinates;
+@property (readonly, nonatomic) NSString * currentPlaceName;
+@property (readonly, nonatomic) NSString * distanceToCurrentPlace;
 
 - (instancetype)initWithMeteoriteService:(MeteoriteService *)meteoriteService
                          locationService:(LocationService *)locationService
                                  storage:(MeteoriteStorage *)storage
                               controller:(DetailViewController *)controller
                                meteorite:(Meteorite *)meteorite;
+
+- (void)placePinFromGesture:(CLLocation *)location;
 
 @end
 

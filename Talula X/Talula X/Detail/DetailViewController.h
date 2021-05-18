@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) DetailViewModel * viewModel;
 @property (strong, nonatomic) Meteorite * meteorite;
 
+- (void)setPinnedPlaceName:(NSString *)name
+               andDistance:(NSString *)distance;
+
 @end
 
 NS_ASSUME_NONNULL_END
