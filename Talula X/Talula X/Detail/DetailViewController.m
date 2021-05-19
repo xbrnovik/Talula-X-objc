@@ -11,6 +11,7 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *seenMeteoriteCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *seenMeteoriteView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *coordinatesLabel;
@@ -34,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSArray<SeenMeteoriteCellModel *> *seenCellModels = [_viewModel meteoriteCellModels];
     self.title = @"";
     self.nameLabel.text = _viewModel.meteorite.name;
     self.placeLabel.text = _viewModel.meteorite.place;
@@ -42,6 +44,7 @@
     self.distanceToCurrentPlaceLabel.text = _viewModel.distanceToCurrentPlace;
     self.yearLabel.text = _viewModel.year;
     self.pinnedPlaceStackView.hidden = YES;
+    self.seenMeteoriteView.hidden = (!seenCellModels || !seenCellModels.count) ? YES : NO;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Meteorites" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     _seenMeteoriteCollectionViewDataSourceDelegate = [SeenMeteoriteCollectionViewDataSourceDelegate new];
@@ -49,7 +52,7 @@
                    forCellWithReuseIdentifier:@"SeenMeteoriteCollectionViewCell"];
     _seenMeteoriteCollectionView.dataSource = _seenMeteoriteCollectionViewDataSourceDelegate;
     _seenMeteoriteCollectionView.delegate = _seenMeteoriteCollectionViewDataSourceDelegate;
-    _seenMeteoriteCollectionViewDataSourceDelegate.cellModels = [_viewModel meteoriteCellModels];
+    _seenMeteoriteCollectionViewDataSourceDelegate.cellModels = seenCellModels;
     
     [self setupMap];
 }
@@ -106,7 +109,10 @@
     _toPinnedPlaceLabel.text = name;
     _distanceToPinnedPlaceLabel.text = distance;
     _pinnedAnnotation.title = name;
-    _pinnedPlaceStackView.hidden = NO;
+    [UIView animateWithDuration:1.0 animations:^{
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        weakSelf.pinnedPlaceStackView.hidden = NO;
+    } completion:nil];
 }
 
 

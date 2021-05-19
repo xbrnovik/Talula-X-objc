@@ -145,18 +145,20 @@
     return fetchedResultsController.fetchedObjects;
 }
 
-- (NSArray<CDMeteorite*>*)seenMeteorites
+- (NSArray<CDMeteorite*>*)seenMeteoritesWithoutMeteoriteWithIdentifier:(NSString *)identifier
 {
     // fetch
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"seen" ascending:NO];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"entity.seen != NULL"];
+    NSPredicate *predicateSeen = [NSPredicate predicateWithFormat:@"seen != NULL"];
+    NSPredicate *predicateIdentifier = [NSPredicate predicateWithFormat:@"identifier != %@", identifier];
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateSeen, predicateIdentifier]];
     
     [request setSortDescriptors:@[sort]];
     [request setEntity:entity];
-//    [request setPredicate:predicate];
+    [request setPredicate:predicate];
     [request setFetchBatchSize:20];
     
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
@@ -184,7 +186,7 @@
     NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"seen" ascending:NO];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"entity.identifier == %@", identifier];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", identifier];
 
     [request setSortDescriptors:@[sort]];
     [request setEntity:entity];
@@ -207,7 +209,7 @@
        NSLog(@"Performed fetch.");
     };
     CDMeteorite *meteorite = fetchedResultsController.fetchedObjects.firstObject;
-    meteorite.seen = [NSDate new];
+    meteorite.seen = [NSDate date];
     [[CoreDataContainer shared] saveContext ];
 }
 

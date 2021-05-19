@@ -32,7 +32,7 @@
     self = [super init];
     if (self) {
         NSMutableArray<SeenMeteoriteCellModel *> * models = [NSMutableArray new];
-        _seenCDMeteorites = _storage.seenMeteorites;
+        _seenCDMeteorites = [_storage seenMeteoritesWithoutMeteoriteWithIdentifier:meteorite.identifier];
         for (CDMeteorite *seenCDMeteorite in _seenCDMeteorites) {
             SeenMeteoriteCellModel *model = [[SeenMeteoriteCellModel alloc] initFromCDMeteorite:seenCDMeteorite];
             [models addObject:model];

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)storeMeteorites:(NSArray<Meteorite*>*)meteorites;
 - (NSArray<CDMeteorite*>*)storedMeteorites;
 - (void)setSeenById:(NSString *)identifier;
-- (NSArray<CDMeteorite*>*)seenMeteorites;
+- (NSArray<CDMeteorite*>*)seenMeteoritesWithoutMeteoriteWithIdentifier:(NSString *)identifier;
 
 @end
 
