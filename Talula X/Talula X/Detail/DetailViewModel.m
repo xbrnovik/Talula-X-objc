@@ -11,6 +11,7 @@
 @interface DetailViewModel ()
 
 @property (weak, nonatomic) DetailViewController * controller;
+@property (readwrite, strong) NSArray<SeenMeteoriteCellModel *> * meteoriteCellModels;
 
 @end
 
@@ -28,6 +29,16 @@
     _controller = controller;
     _meteorite = meteorite;
     self = [super init];
+    if (self) {
+        NSMutableArray<SeenMeteoriteCellModel *> * models = [NSMutableArray new];
+        NSArray<CDMeteorite *> * seenCDMeteorites = _storage.seenMeteorites;
+        for (CDMeteorite *seenCDMeteorite in seenCDMeteorites) {
+            SeenMeteoriteCellModel *model = [[SeenMeteoriteCellModel alloc] initFromCDMeteorite:seenCDMeteorite];
+            [models addObject:model];
+        }
+        _meteoriteCellModels = models;
+        [_storage setSeenById:_meteorite.identifier];
+    }
     return self;
 }
 
@@ -77,6 +88,18 @@
     distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
     NSString *distancePretty = [distanceFormatter stringFromDistance:[distance doubleValue]];
     return distancePretty;
+}
+
+#pragma mark - Navigate
+
+- (void)showDetailWithMeteorite:(CDMeteorite *)seenCDMeteorite
+{
+    UINavigationController *navigationController = _controller.navigationController;
+    Meteorite *seenMeteorite = [Meteorite new];
+    [seenMeteorite setupFromCDMeteorite:seenCDMeteorite];
+    if ((navigationController) && (seenMeteorite)) {
+        [[AppCoordinator shared] showDetailFromNavigationController:navigationController withMeteorite:seenMeteorite];
+    }
 }
 
 @end

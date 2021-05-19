@@ -9,10 +9,10 @@
 #import "MeteoriteService.h"
 #import "MeteoriteStorage.h"
 #import "LocationService.h"
+#import "SeenMeteoriteCellModel.h"
+#import "AppCoordinator.h"
 
 @class DetailViewController;
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailViewModel : NSObject
 
@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) NSString * currentPlaceName;
 @property (readonly, nonatomic) NSString * distanceToCurrentPlace;
 
+@property (readonly, nonatomic) NSArray<SeenMeteoriteCellModel *> * meteoriteCellModels; //NOTE: private(set) => readonly + writeonly
+
 - (instancetype)initWithMeteoriteService:(MeteoriteService *)meteoriteService
                          locationService:(LocationService *)locationService
                                  storage:(MeteoriteStorage *)storage
@@ -37,5 +39,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)placePinFromGesture:(CLLocation *)location;
 
 @end
-
-NS_ASSUME_NONNULL_END

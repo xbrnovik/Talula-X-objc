@@ -9,8 +9,8 @@
 
 @interface MeteoriteCellModel ()
 
-    @property (strong, nonatomic) NSNumber *mass;
-    @property (strong, nonatomic) NSNumber *lastDistance;
+@property (strong, nonatomic) NSNumber *mass;
+@property (strong, nonatomic) NSNumber *lastDistance;
 
 @end
 

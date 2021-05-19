@@ -7,10 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "DetailViewModel.h"
 #import "Meteorite.h"
+#import "SeenMeteoriteCollectionViewDataSourceDelegate.h"
+#import "DetailViewModel.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class DetailViewModel;
 
 @interface DetailViewController : UIViewController
 
@@ -21,5 +22,3 @@ NS_ASSUME_NONNULL_BEGIN
                andDistance:(NSString *)distance;
 
 @end
-
-NS_ASSUME_NONNULL_END

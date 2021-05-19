@@ -8,7 +8,9 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UICollectionView *seenMeteoriteCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *coordinatesLabel;
@@ -22,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIStackView *pinnedPlaceStackView;
 @property (weak, nonatomic) MKPointAnnotation *meteoriteAnnotation;
 @property (weak, nonatomic) MKPointAnnotation *pinnedAnnotation;
+
+@property (strong, nonatomic) SeenMeteoriteCollectionViewDataSourceDelegate *seenMeteoriteCollectionViewDataSourceDelegate;
 
 @end
 
@@ -38,6 +42,13 @@
     self.distanceToCurrentPlaceLabel.text = _viewModel.distanceToCurrentPlace;
     self.yearLabel.text = _viewModel.year;
     self.pinnedPlaceStackView.hidden = YES;
+    
+    _seenMeteoriteCollectionViewDataSourceDelegate = [SeenMeteoriteCollectionViewDataSourceDelegate new];
+    [_seenMeteoriteCollectionView registerNib:[UINib nibWithNibName:@"SeenMeteoriteCollectionViewCell" bundle:nil]
+                   forCellWithReuseIdentifier:@"SeenMeteoriteCollectionViewCell"];
+    _seenMeteoriteCollectionView.dataSource = _seenMeteoriteCollectionViewDataSourceDelegate;
+    _seenMeteoriteCollectionView.delegate = _seenMeteoriteCollectionViewDataSourceDelegate;
+    _seenMeteoriteCollectionViewDataSourceDelegate.cellModels = [_viewModel meteoriteCellModels];
     
     [self setupMap];
 }
@@ -79,7 +90,6 @@
         CGPoint point = [_gestureRecognizer locationInView:_mapView];
         CLLocationCoordinate2D coordinates = [_mapView convertPoint:point toCoordinateFromView:_mapView];
         
-        
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] initWithCoordinate:coordinates];
         [_mapView addAnnotation:annotation];
         
@@ -92,7 +102,7 @@
 - (void)setPinnedPlaceName:(NSString *)name
                 andDistance:(NSString *)distance
 {
-    _placeLabel.text = name;
+    _toPinnedPlaceLabel.text = name;
     _distanceToPinnedPlaceLabel.text = distance;
     _pinnedAnnotation.title = name;
     _pinnedPlaceStackView.hidden = NO;
