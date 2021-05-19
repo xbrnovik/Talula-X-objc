@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) DetailViewController * controller;
 @property (readwrite, strong) NSArray<SeenMeteoriteCellModel *> * meteoriteCellModels;
+@property (strong, nonatomic) NSArray<CDMeteorite *> * seenCDMeteorites;
 
 @end
 
@@ -31,13 +32,15 @@
     self = [super init];
     if (self) {
         NSMutableArray<SeenMeteoriteCellModel *> * models = [NSMutableArray new];
-        NSArray<CDMeteorite *> * seenCDMeteorites = _storage.seenMeteorites;
-        for (CDMeteorite *seenCDMeteorite in seenCDMeteorites) {
+        _seenCDMeteorites = _storage.seenMeteorites;
+        for (CDMeteorite *seenCDMeteorite in _seenCDMeteorites) {
             SeenMeteoriteCellModel *model = [[SeenMeteoriteCellModel alloc] initFromCDMeteorite:seenCDMeteorite];
             [models addObject:model];
         }
         _meteoriteCellModels = models;
+        [self setCellHandlers];
         [_storage setSeenById:_meteorite.identifier];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentPlace) name:@"didUpdateLocations" object:nil];
     }
     return self;
 }
@@ -100,6 +103,33 @@
     if ((navigationController) && (seenMeteorite)) {
         [[AppCoordinator shared] showDetailFromNavigationController:navigationController withMeteorite:seenMeteorite];
     }
+}
+
+- (void)setCellHandlers
+{
+    SelectedRowHandler selectedRowHandler = ^(NSIndexPath *indexPath) {
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        [weakSelf showDetailWithMeteorite:weakSelf.seenCDMeteorites[indexPath.row]];
+        
+        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: weakSelf.controller.navigationController.viewControllers];
+        [navigationArray removeObjectAtIndex: navigationArray.count-2];
+        weakSelf.controller.navigationController.viewControllers = navigationArray;
+    };
+    
+    for (SeenMeteoriteCellModel *model in _meteoriteCellModels) {
+        model.handler = selectedRowHandler;
+    }
+}
+
+// gps
+- (void)reloadCurrentPlace
+{
+    NSString *lastKnownLocationName = _locationService.lastKnownLocationName;
+    
+    MKDistanceFormatter *distanceFormatter = [[MKDistanceFormatter alloc]init];
+    distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
+    NSString *distancePretty = [distanceFormatter stringFromDistance:[_meteorite.lastDistance doubleValue]];
+    [_controller setCurrentPlaceName:lastKnownLocationName andDistance:distancePretty];
 }
 
 @end

@@ -42,6 +42,7 @@
     self.distanceToCurrentPlaceLabel.text = _viewModel.distanceToCurrentPlace;
     self.yearLabel.text = _viewModel.year;
     self.pinnedPlaceStackView.hidden = YES;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Meteorites" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     _seenMeteoriteCollectionViewDataSourceDelegate = [SeenMeteoriteCollectionViewDataSourceDelegate new];
     [_seenMeteoriteCollectionView registerNib:[UINib nibWithNibName:@"SeenMeteoriteCollectionViewCell" bundle:nil]
@@ -106,6 +107,14 @@
     _distanceToPinnedPlaceLabel.text = distance;
     _pinnedAnnotation.title = name;
     _pinnedPlaceStackView.hidden = NO;
+}
+
+
+- (void)setCurrentPlaceName:(NSString *)name
+                andDistance:(NSString *)distance
+{
+    _toCurrentPlaceLabel.text = name;
+    _distanceToCurrentPlaceLabel.text = distance;
 }
 
 @end
