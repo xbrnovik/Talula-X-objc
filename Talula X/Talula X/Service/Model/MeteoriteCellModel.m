@@ -9,7 +9,8 @@
 
 @interface MeteoriteCellModel ()
 
-    @property (strong, nonatomic) NSNumber *mass;
+@property (strong, nonatomic) NSNumber *mass;
+@property (strong, nonatomic) NSNumber *lastDistance;
 
 @end
 
@@ -17,8 +18,21 @@
 
 @synthesize massRounded = _massRounded;
 @synthesize icon = _icon;
+@synthesize distance = _distance;
 
-- (NSString *)massRounded
+- (instancetype)initFromMeteorite:(Meteorite *)meteorite
+{
+    _name = meteorite.name;
+    _mass = meteorite.mass;
+    _place = meteorite.place;
+    _latitude = meteorite.latitude;
+    _longitude = meteorite.longitude;
+    _lastDistance = meteorite.lastDistance;
+    self = [super init];
+    return self;
+}
+
+- (NSString *)massRounded 
 {
     NSString *massRoundedText = [self.localeFormatter stringFromNumber:_mass]; // :( not great, not terrible;
     return [NSString stringWithFormat:@"%@ g", massRoundedText];
@@ -35,38 +49,12 @@
     }
 }
 
-#pragma mark - Setup
-
-- (void)setupFromCDMeteorite:(CDMeteorite *)meteorite
+- (NSString *)distance
 {
-    _name = meteorite.name;
-    _mass = [NSNumber numberWithDouble:meteorite.mass];
-    _place = meteorite.place ? meteorite.place : @"-";
-    _latitude = [[NSNumber alloc] initWithDouble:meteorite.latitude];
-    _longitude = [[NSNumber alloc] initWithDouble:meteorite.longitude];
-}
-
-- (void)setupFromMeteorite:(Meteorite *)meteorite
-{
-    _name = meteorite.name;
-    _mass = meteorite.mass;
-    _place = meteorite.place ? meteorite.place : @"-";
-    _latitude = meteorite.latitude;
-    _longitude = meteorite.longitude;
-}
-
-#pragma mark - Calculate
-
-- (NSNumber *)distanceFromLocation:(CLLocation *)location
-{
-    CLLocation *meteoriteLocation = [[CLLocation alloc] initWithLatitude:[_latitude doubleValue] longitude:[_longitude doubleValue]];
-    double distanceDouble = [meteoriteLocation distanceFromLocation:location];
-    NSNumber *distance = [[NSNumber alloc] initWithDouble:distanceDouble];
     MKDistanceFormatter *distanceFormatter = [[MKDistanceFormatter alloc]init];
     distanceFormatter.unitStyle = MKDistanceFormatterUnitStyleFull;
-    NSString *distancePretty = [distanceFormatter stringFromDistance:distanceDouble];
-    _lastDistance = distancePretty;
-    return distance;
+    NSString *distancePretty = [distanceFormatter stringFromDistance:[_lastDistance doubleValue]];
+    return distancePretty;
 }
 
 #pragma mark - Formatters

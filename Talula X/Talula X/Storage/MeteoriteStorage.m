@@ -145,4 +145,72 @@
     return fetchedResultsController.fetchedObjects;
 }
 
+- (NSArray<CDMeteorite*>*)seenMeteoritesWithoutMeteoriteWithIdentifier:(NSString *)identifier
+{
+    // fetch
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"seen" ascending:NO];
+    NSPredicate *predicateSeen = [NSPredicate predicateWithFormat:@"seen != NULL"];
+    NSPredicate *predicateIdentifier = [NSPredicate predicateWithFormat:@"identifier != %@", identifier];
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateSeen, predicateIdentifier]];
+    
+    [request setSortDescriptors:@[sort]];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    [request setFetchBatchSize:20];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                            initWithFetchRequest:request
+                                                            managedObjectContext:managedObjectContext
+                                                            sectionNameKeyPath:nil
+                                                            cacheName:nil];
+    NSError *error = nil;
+    @try {
+        [fetchedResultsController performFetch:&error];
+     }
+    @catch (NSException *exception) {
+        NSLog(@"Unable to perform fetch. Error: %@. Reason: %@.", error, exception.reason);
+    }
+    @finally {
+       NSLog(@"Performed fetch.");
+    };
+    return fetchedResultsController.fetchedObjects;
+}
+
+- (void)setSeenById:(NSString *)identifier
+{
+    // fetch
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSManagedObjectContext *managedObjectContext = [[[CoreDataContainer shared] persistentContainer ] viewContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CDMeteorite" inManagedObjectContext:managedObjectContext];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"seen" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", identifier];
+
+    [request setSortDescriptors:@[sort]];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    [request setFetchBatchSize:20];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                            initWithFetchRequest:request
+                                                            managedObjectContext:managedObjectContext
+                                                            sectionNameKeyPath:nil
+                                                            cacheName:nil];
+    NSError *error = nil;
+    @try {
+        [fetchedResultsController performFetch:&error];
+     }
+    @catch (NSException *exception) {
+        NSLog(@"Unable to perform fetch. Error: %@. Reason: %@.", error, exception.reason);
+    }
+    @finally {
+       NSLog(@"Performed fetch.");
+    };
+    CDMeteorite *meteorite = fetchedResultsController.fetchedObjects.firstObject;
+    meteorite.seen = [NSDate date];
+    [[CoreDataContainer shared] saveContext ];
+}
+
 @end

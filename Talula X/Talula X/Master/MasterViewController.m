@@ -41,7 +41,7 @@
 - (void)reloadMeteoritesWithSuccess:(BOOL)success
 {
     if (_meteoritesTableView != nil) {
-        NSArray<MeteoriteCellModel*>* models = [_viewModel meteorites];
+        NSArray<MeteoriteCellModel*>* models = [_viewModel meteoriteCellModels];
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -56,8 +56,6 @@
                     [self shakeView];
                 }
             }];
-            
-            
         });
     }
 }
@@ -65,7 +63,7 @@
 - (void)reloadMeteorites
 {
     if (_meteoritesTableView != nil) {
-        NSArray<MeteoriteCellModel*>* models = [_viewModel meteorites];
+        NSArray<MeteoriteCellModel*>* models = [_viewModel meteoriteCellModels];
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -74,7 +72,6 @@
             } completion:nil];
         });
     }
-   
 }
 
 #pragma mark - Tapped

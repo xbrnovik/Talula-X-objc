@@ -14,6 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^SelectedRowHandler)(NSIndexPath *indexPath);
+
 @interface MeteoriteCellModel : NSObject
 
 @property (strong, nonatomic) NSString *name;
@@ -22,11 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIImage *icon;
 @property (strong, nonatomic) NSNumber *latitude;
 @property (strong, nonatomic) NSNumber *longitude;
-@property (strong, nonatomic) NSString *lastDistance;
+@property (strong, nonatomic) NSString *distance;
+@property (nonatomic) SelectedRowHandler handler;
 
-- (void)setupFromCDMeteorite:(CDMeteorite *)meteorite;
-- (void)setupFromMeteorite:(Meteorite *)meteorite;
-- (NSNumber *)distanceFromLocation:(CLLocation *)location;
+- (instancetype)initFromMeteorite:(Meteorite *)meteorite;
 
 @end
 

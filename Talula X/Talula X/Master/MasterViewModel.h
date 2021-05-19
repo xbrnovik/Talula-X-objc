@@ -10,7 +10,10 @@
 #import "MeteoriteService.h"
 #import "MeteoriteStorage.h"
 #import "LocationService.h"
-
+#import "AppCoordinator.h"
+#import "Meteorite.h"
+#import "CDMeteorite+CoreDataClass.h"
+#import "CDMeteorite+CoreDataProperties.h"
 
 @class MasterViewController;
 
@@ -20,13 +23,14 @@
 @property (strong, nonatomic) MeteoriteService * meteoriteService;
 @property (strong, nonatomic) LocationService * locationService;
 @property (strong, nonatomic) MeteoriteStorage * storage;
-@property (readonly, nonatomic) NSMutableArray<MeteoriteCellModel *> * meteorites; //NOTE: private(set) => readonly + writeonly
+@property (readonly, nonatomic) NSMutableArray<MeteoriteCellModel *> * meteoriteCellModels; //NOTE: private(set) => readonly + writeonly
 
 - (instancetype)initWithMeteoriteService:(MeteoriteService *)meteoriteService
                          locationService:(LocationService *)locationService
                                  storage:(MeteoriteStorage *)storage
                               controller:(MasterViewController *)controller;
 - (void)updateMeteorites;
-- (void)sortMeteorites;
+- (void)reloadMeteorites;
+- (void)showDetailWithMeteorite:(Meteorite *)meteorite;
 
 @end

@@ -8,9 +8,10 @@
         <attribute name="mass" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="place" optional="YES" attributeType="String"/>
+        <attribute name="seen" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="year" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="CDMeteorite" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="CDMeteorite" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>

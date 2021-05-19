@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LocationService : NSObject <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocation * lastKnownLocation;
+@property (strong, nonatomic) NSString * lastKnownLocationName;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (void)requestPermission;

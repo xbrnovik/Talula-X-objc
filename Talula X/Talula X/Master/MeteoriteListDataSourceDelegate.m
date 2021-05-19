@@ -23,19 +23,28 @@
 
 #pragma mark - Delegate & DataSource
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
     MeteoriteCellModel *model = _cellModels[indexPath.row];
     MeteoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:METEORITE_TABLEVIEW_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.nameLabel.text = model.name;
     cell.massLabel.text = model.massRounded;
     cell.placeLabel.text = model.place;
     cell.iconImageView.image = model.icon;
-    cell.distanceLabel.text = model.lastDistance;
+    cell.distanceLabel.text = model.distance;
     return cell;
 }
 
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return _cellModels.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MeteoriteCellModel *model = _cellModels[indexPath.row];
+    model.handler(indexPath); // ??? :( Not great not terrible
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
