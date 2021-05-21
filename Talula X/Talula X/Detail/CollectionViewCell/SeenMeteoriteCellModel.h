@@ -17,7 +17,8 @@ typedef void(^SelectedRowHandler)(NSIndexPath *indexPath);
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) UIImage *icon;
-@property (nonatomic) SelectedRowHandler handler;
+@property (nonatomic) SelectedRowHandler navigateHandler;
+@property (nonatomic) SelectedRowHandler deleteHandler;
 
 - (instancetype)initFromCDMeteorite:(CDMeteorite *)meteorite;
 

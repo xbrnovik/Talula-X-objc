@@ -22,5 +22,6 @@
                andDistance:(NSString *)distance;
 - (void)setCurrentPlaceName:(NSString *)name
                 andDistance:(NSString *)distance;
+- (void)reloadSeenMeteorites;
 
 @end

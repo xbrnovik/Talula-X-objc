@@ -6,14 +6,20 @@
 //
 
 #import "SeenMeteoriteCollectionViewCell.h"
+#import "SeenMeteoriteCollectionViewDataSourceDelegate.h"
 
 NSString *const SEEN_METEORITE_COLLECTIONVIEW_CELL_IDENTIFIER = @"SeenMeteoriteCollectionViewCell";
 
 @implementation SeenMeteoriteCollectionViewCell
 
+@synthesize delegate;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+}
+- (IBAction)deleteTapped:(id)sender
+{
+    [delegate buttonTappedAtIndexPath:_indexPath];
 }
 
 @end
