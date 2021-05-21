@@ -155,10 +155,13 @@
     _seenMeteoriteCollectionViewDataSourceDelegate.cellModels = seenCellModels;
     __weak typeof(self) weakSelf = self; // :( not great not terrible
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:1.0 animations:^{
-            [weakSelf.seenMeteoriteCollectionView reloadData];
-            weakSelf.seenMeteoriteView.hidden = (!seenCellModels || !seenCellModels.count) ? YES : NO;
-        } completion:nil];
+        [self.seenMeteoriteCollectionView performBatchUpdates:^{
+            [self.seenMeteoriteCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:1.0 animations:^{
+                weakSelf.seenMeteoriteView.hidden = (!seenCellModels || !seenCellModels.count) ? YES : NO;
+            } completion:nil];
+        }];
     });
 }
 
