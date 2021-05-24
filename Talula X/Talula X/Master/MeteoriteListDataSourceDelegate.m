@@ -16,8 +16,10 @@
 
 - (instancetype)initWithCellModels:(NSArray<MeteoriteCellModel*>*)cellModels
 {
-    _cellModels = cellModels;
     self = [super init];
+    if (self) {
+        _cellModels = cellModels;
+    }
     return self;
 }
 

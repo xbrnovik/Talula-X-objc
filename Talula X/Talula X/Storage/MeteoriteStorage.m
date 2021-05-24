@@ -17,8 +17,10 @@
 
 - (instancetype)init
 {
-    [self createFetchedResultsController];
     self = [super init];
+    if (self) {
+        [self createFetchedResultsController];
+    }
     return self;
 }
 
@@ -77,6 +79,11 @@
     @finally {
        NSLog(@"Performed fetch.");
     };
+    //TODO: create Dictionary identifier:date
+    NSMutableDictionary<NSString *, NSDate *> *seenMeteoritesDictionary = [NSMutableDictionary new];
+    for (CDMeteorite *meteorite in fetchedResultsController.fetchedObjects) {
+        seenMeteoritesDictionary[meteorite.identifier] = meteorite.seen;
+    }
     //delete
     NSFetchRequest *deleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"CDMeteorite"];
     NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:deleteFetchRequest];
@@ -93,6 +100,7 @@
         newMeteorite.longitude = [meteorite.longitude doubleValue];
         newMeteorite.mass = [meteorite.mass doubleValue];
         newMeteorite.name = meteorite.name;
+        newMeteorite.seen = seenMeteoritesDictionary[meteorite.identifier];
     }
     //save
     [[CoreDataContainer shared] saveContext];

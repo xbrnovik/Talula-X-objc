@@ -23,11 +23,13 @@
                                  storage:(MeteoriteStorage *)storage
                               controller:(MasterViewController *)controller
 {
-    _meteoriteService = meteoriteService;
-    _locationService = locationService;
-    _storage = storage;
-    _controller = controller;
     self = [super init];
+    if (self) {
+        _meteoriteService = meteoriteService;
+        _locationService = locationService;
+        _storage = storage;
+        _controller = controller;
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMeteorites) name:@"didUpdateLocations" object:nil];
     return self;
 }

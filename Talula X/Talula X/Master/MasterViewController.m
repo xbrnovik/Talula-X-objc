@@ -26,6 +26,7 @@
     self.title = @"Meteorites";
     self.errorLabel.text = @"Prepáč, nastala chyba. Zobrazované dáta sú offline.";
     self.errorView.hidden = YES;
+    self.errorImageView.hidden = YES;
     _meteoriteListDataSourceDelegate = [MeteoriteListDataSourceDelegate new];
     [self.meteoritesTableView registerNib:[UINib nibWithNibName:@"MeteoriteTableViewCell" bundle:nil] forCellReuseIdentifier:@"MeteoriteTableViewCell"];
     _refreshControl = [[UIRefreshControl alloc]init];
@@ -45,7 +46,7 @@
         _meteoriteListDataSourceDelegate.cellModels = models;
         __weak typeof(self) weakSelf = self; // :( not great not terrible
         dispatch_async(dispatch_get_main_queue(), ^{
-            BOOL isVisibleChanged = weakSelf.errorImageView.hidden != success;
+            BOOL isVisibleChanged = weakSelf.errorView.hidden != success;
             [UIView animateWithDuration:1.0 animations:^{
                 [weakSelf.meteoritesTableView reloadData];
                 weakSelf.errorView.hidden = success;

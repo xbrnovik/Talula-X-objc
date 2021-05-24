@@ -22,13 +22,15 @@
 
 - (instancetype)initFromMeteorite:(Meteorite *)meteorite
 {
-    _name = meteorite.name;
-    _mass = meteorite.mass;
-    _place = meteorite.place;
-    _latitude = meteorite.latitude;
-    _longitude = meteorite.longitude;
-    _lastDistance = meteorite.lastDistance;
     self = [super init];
+    if (self) {
+        _name = meteorite.name;
+        _mass = meteorite.mass;
+        _place = meteorite.place;
+        _latitude = meteorite.latitude;
+        _longitude = meteorite.longitude;
+        _lastDistance = meteorite.lastDistance;
+    }
     return self;
 }
 

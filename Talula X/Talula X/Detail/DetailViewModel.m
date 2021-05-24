@@ -24,13 +24,13 @@
                               controller:(DetailViewController *)controller
                                meteorite:(Meteorite *)meteorite
 {
-    _meteoriteService = meteoriteService;
-    _locationService = locationService;
-    _storage = storage;
-    _controller = controller;
-    _meteorite = meteorite;
     self = [super init];
     if (self) {
+        _meteoriteService = meteoriteService;
+        _locationService = locationService;
+        _storage = storage;
+        _controller = controller;
+        _meteorite = meteorite;
         [self loadMeteorites];
         [_storage setSeenById:_meteorite.identifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentPlace) name:@"didUpdateLocations" object:nil];
