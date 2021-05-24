@@ -19,9 +19,11 @@
 
 - (instancetype)initFromCDMeteorite:(CDMeteorite *)meteorite
 {
-    _name = meteorite.name;
-    _mass = [[NSNumber alloc] initWithDouble:meteorite.mass ];
     self = [super init];
+    if (self) {
+        _name = meteorite.name;
+        _mass = [[NSNumber alloc] initWithDouble:meteorite.mass ];
+    }
     return self;
 }
 

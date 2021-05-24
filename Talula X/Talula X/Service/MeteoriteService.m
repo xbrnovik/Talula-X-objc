@@ -31,10 +31,10 @@
 {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-         if(placemarks && placemarks.count > 0) {
+         if (success && (placemarks && placemarks.count > 0)) {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
              success(placemark);
-         } else {
+         } else if (failure){
              failure(error);
          }
         always();
@@ -69,7 +69,7 @@
                     NSString *administrativeArea = (placemark.name != placemark.administrativeArea)
                                                     ? placemark.administrativeArea
                                                     : nil;
-                    meteorite.place = [[NSArray arrayWithObjects:name, country, administrativeArea, nil] componentsJoinedByString:@","];
+                    meteorite.place = [[NSArray arrayWithObjects:name, country, administrativeArea, nil] componentsJoinedByString:@", "];
                 } failure:^(NSError * _Nonnull error) {
                     NSLog(@"Meteorite location unavailable with error: %@", error);
                 } always:^{
@@ -77,13 +77,17 @@
                 }];
             }
             dispatch_group_notify(group, mainQueue, ^{
-                success(meteoriteResponse);
+                if (success) {
+                    success(meteoriteResponse);
+                }
             });
             
-        } else {
+        } else if (failure){
             failure(error);
         }
-        always();
+        if (always) {
+            always();            
+        }
     }];
     [downloadTask resume];
 }

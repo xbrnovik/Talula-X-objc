@@ -12,9 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SeenMeteoriteCollectionViewDataSourceDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@protocol CollectionViewButtonDelegate <NSObject>
+
+@required
+- (void)buttonTappedAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+@interface SeenMeteoriteCollectionViewDataSourceDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CollectionViewButtonDelegate>
 
 @property (strong, nonatomic) NSArray<SeenMeteoriteCellModel*>* cellModels;
+@property (nonatomic) BOOL isEditing;
 
 @end
 

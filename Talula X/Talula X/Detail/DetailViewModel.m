@@ -24,21 +24,14 @@
                               controller:(DetailViewController *)controller
                                meteorite:(Meteorite *)meteorite
 {
-    _meteoriteService = meteoriteService;
-    _locationService = locationService;
-    _storage = storage;
-    _controller = controller;
-    _meteorite = meteorite;
     self = [super init];
     if (self) {
-        NSMutableArray<SeenMeteoriteCellModel *> * models = [NSMutableArray new];
-        _seenCDMeteorites = [_storage seenMeteoritesWithoutMeteoriteWithIdentifier:meteorite.identifier];
-        for (CDMeteorite *seenCDMeteorite in _seenCDMeteorites) {
-            SeenMeteoriteCellModel *model = [[SeenMeteoriteCellModel alloc] initFromCDMeteorite:seenCDMeteorite];
-            [models addObject:model];
-        }
-        _meteoriteCellModels = models;
-        [self setCellHandlers];
+        _meteoriteService = meteoriteService;
+        _locationService = locationService;
+        _storage = storage;
+        _controller = controller;
+        _meteorite = meteorite;
+        [self loadMeteorites];
         [_storage setSeenById:_meteorite.identifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentPlace) name:@"didUpdateLocations" object:nil];
     }
@@ -93,6 +86,18 @@
     return distancePretty;
 }
 
+- (void)loadMeteorites
+{
+    NSMutableArray<SeenMeteoriteCellModel *> * models = [NSMutableArray new];
+    _seenCDMeteorites = [_storage seenMeteoritesWithoutMeteoriteWithIdentifier:_meteorite.identifier];
+    for (CDMeteorite *seenCDMeteorite in _seenCDMeteorites) {
+        SeenMeteoriteCellModel *model = [[SeenMeteoriteCellModel alloc] initFromCDMeteorite:seenCDMeteorite];
+        [models addObject:model];
+    }
+    _meteoriteCellModels = models;
+    [self setCellHandlers];
+}
+
 #pragma mark - Navigate
 
 - (void)showDetailWithMeteorite:(CDMeteorite *)seenCDMeteorite
@@ -116,8 +121,17 @@
         weakSelf.controller.navigationController.viewControllers = navigationArray;
     };
     
+    SelectedRowHandler deleteRowHandler = ^(NSIndexPath *indexPath) {
+        __weak typeof(self) weakSelf = self; // :( not great not terrible
+        CDMeteorite *seenCDMeteorite = weakSelf.seenCDMeteorites[indexPath.row];
+        [weakSelf.storage removeSeenById:seenCDMeteorite.identifier];
+        [self loadMeteorites];
+        [self.controller reloadSeenMeteorites];
+    };
+    
     for (SeenMeteoriteCellModel *model in _meteoriteCellModels) {
-        model.handler = selectedRowHandler;
+        model.navigateHandler = selectedRowHandler;
+        model.deleteHandler = deleteRowHandler;
     }
 }
 

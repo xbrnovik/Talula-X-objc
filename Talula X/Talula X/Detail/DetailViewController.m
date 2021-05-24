@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *seenMeteoriteCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *seenMeteoriteView;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *coordinatesLabel;
@@ -20,7 +21,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceToCurrentPlaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceToPinnedPlaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
-@property (weak, nonatomic) IBOutlet UILongPressGestureRecognizer *gestureRecognizer;
+
+@property (weak, nonatomic) IBOutlet UILongPressGestureRecognizer *mapLongGestureRecognizer;
+@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *collectionLongGestureRecognizer;
 
 @property (weak, nonatomic) IBOutlet UIStackView *pinnedPlaceStackView;
 @property (weak, nonatomic) MKPointAnnotation *meteoriteAnnotation;
@@ -81,8 +84,8 @@
     }
 }
 
-- (IBAction)longPressedGesture:(id)sender {
-    if (_gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+- (IBAction)addPinPressedGesture:(id)sender {
+    if (_mapLongGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         NSMutableArray *annotationsToRemove = [NSMutableArray new];
         for (id annotation in _mapView.annotations){
             if (annotation != _meteoriteAnnotation) {
@@ -91,7 +94,7 @@
         }
         [_mapView removeAnnotations:annotationsToRemove];
         
-        CGPoint point = [_gestureRecognizer locationInView:_mapView];
+        CGPoint point = [_mapLongGestureRecognizer locationInView:_mapView];
         CLLocationCoordinate2D coordinates = [_mapView convertPoint:point toCoordinateFromView:_mapView];
         
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] initWithCoordinate:coordinates];
@@ -101,6 +104,29 @@
         CLLocation *pinLocation = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
         [_viewModel placePinFromGesture:pinLocation];
     }
+}
+
+- (IBAction)cancelSeenMeteoriteEditingTappedGesture:(id)sender
+{
+    self.seenMeteoriteCollectionViewDataSourceDelegate.isEditing = NO;
+    [self.seenMeteoriteCollectionView reloadData];
+}
+
+- (IBAction)startSeenMeteoriteEditingPressedGesture:(id)sender
+{
+    if (_collectionLongGestureRecognizer.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+    self.seenMeteoriteCollectionViewDataSourceDelegate.isEditing = YES;
+    [self.seenMeteoriteCollectionView reloadData];
+    
+//    CAShapeLayer *borderLayer = [CAShapeLayer layer];
+//    borderLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+//    borderLayer.fillColor = nil;
+//    borderLayer.lineDashPattern = @[@4, @2];
+//    borderLayer.frame = self.seenMeteoriteView.bounds;
+//    borderLayer.path = [UIBezierPath bezierPathWithRect:self.seenMeteoriteView.bounds].CGPath;
+//    [self.seenMeteoriteView.layer addSublayer:borderLayer];
 }
 
 - (void)setPinnedPlaceName:(NSString *)name
@@ -121,6 +147,22 @@
 {
     _toCurrentPlaceLabel.text = name;
     _distanceToCurrentPlaceLabel.text = distance;
+}
+
+- (void)reloadSeenMeteorites
+{
+    NSArray<SeenMeteoriteCellModel *> *seenCellModels = [_viewModel meteoriteCellModels];
+    _seenMeteoriteCollectionViewDataSourceDelegate.cellModels = seenCellModels;
+    __weak typeof(self) weakSelf = self; // :( not great not terrible
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.seenMeteoriteCollectionView performBatchUpdates:^{
+            [self.seenMeteoriteCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:1.0 animations:^{
+                weakSelf.seenMeteoriteView.hidden = (!seenCellModels || !seenCellModels.count) ? YES : NO;
+            } completion:nil];
+        }];
+    });
 }
 
 @end

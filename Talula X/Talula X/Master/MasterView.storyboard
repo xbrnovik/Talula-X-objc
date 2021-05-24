@@ -25,7 +25,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blJ-fb-MRx">
-                                        <rect key="frame" x="0.0" y="816" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="782" width="414" height="114"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-gC-yeE">
                                                 <rect key="frame" x="10" y="10" width="394" height="60"/>
@@ -49,7 +49,6 @@
                                         <color key="backgroundColor" red="1" green="0.87040522478208449" blue="0.839029722699836" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="eLx-gC-yeE" firstAttribute="leading" secondItem="blJ-fb-MRx" secondAttribute="leading" constant="10" id="8fx-L2-9cJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="eLx-gC-yeE" secondAttribute="bottom" constant="10" id="Yyw-Xq-rtq"/>
                                             <constraint firstAttribute="trailing" secondItem="eLx-gC-yeE" secondAttribute="trailing" constant="10" id="miT-Ya-rRf"/>
                                             <constraint firstItem="eLx-gC-yeE" firstAttribute="top" secondItem="blJ-fb-MRx" secondAttribute="top" constant="10" id="pLF-X3-YMJ"/>
                                         </constraints>
@@ -66,6 +65,7 @@
                             <constraint firstItem="Qkd-NX-gZ2" firstAttribute="leading" secondItem="mmK-tO-dVF" secondAttribute="leading" id="9EP-DC-Elk"/>
                             <constraint firstAttribute="bottom" secondItem="Qkd-NX-gZ2" secondAttribute="bottom" id="E19-GZ-SlR"/>
                             <constraint firstItem="Qkd-NX-gZ2" firstAttribute="top" secondItem="9tu-yw-IyU" secondAttribute="top" id="Z86-IR-u2b"/>
+                            <constraint firstItem="eLx-gC-yeE" firstAttribute="bottom" secondItem="mmK-tO-dVF" secondAttribute="bottom" constant="-10" id="gqb-ZB-SXa"/>
                             <constraint firstAttribute="trailing" secondItem="Qkd-NX-gZ2" secondAttribute="trailing" id="zIP-Km-ioM"/>
                         </constraints>
                     </view>
